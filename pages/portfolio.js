@@ -39,7 +39,7 @@ export default function Portfolio() {
                 <form onSubmit={handleSubmit} class="w-full max-w-sm mx-auto">
                     <div class="flex items-center border-b border-teal-900 py-2">
                         <input id="email" name="Email" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="email" placeholder="Please enter your email" aria-label="Full name" />
-                        <button class="flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 text-base font-bold border-4 text-white py-1 px-2 rounded" type="submit" disabled={state.submitting}>
+                        <button class="flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 text-base font-bold border-4 text-white py-1 px-2 rounded" type="submit">
                             Notify Me
                         </button>
                     </div>

@@ -1,11 +1,16 @@
+import Head from 'next/head'
 import Nav from '../components/nav'
 import Link from 'next/link'
 
 export default function IndexPage() {
   return (
     <div>
+      <Head>
+        <title>Ofori James Ayerakwa</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Nav />
-      <div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0">
+      <div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0 lg:pb-12">
         <div className="w-full  lg:w-2/5">
           <img src="./mypic.jpg" className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
         </div>

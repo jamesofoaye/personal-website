@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d66d223a-908b-48a0-aec0-ff8ce3df78e3" name="Default Changelist" comment="" />
+    <list default="true" id="d66d223a-908b-48a0-aec0-ff8ce3df78e3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -25,6 +28,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BookSwap/bookswap" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -36,6 +41,8 @@
       <option name="presentableId" value="Default" />
       <updated>1605228790267</updated>
       <workItem from="1605228839099" duration="417000" />
+      <workItem from="1605265585508" duration="1074000" />
+      <workItem from="1605387510269" duration="723000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the portfolio page">
       <created>1605229179957</created>
@@ -63,9 +70,14 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="543" y="282" key="Github.ShareDialog/0.0.1366.768/1366.0.1360.768@0.0.1366.768" timestamp="1605228973139" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1605229210599">
+    <state x="321" y="145" key="MultipleFileMergeDialog" timestamp="1605266021705">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="321" y="145" key="MultipleFileMergeDialog/0.0.1366.768@0.0.1366.768" timestamp="1605266021705" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1605265882574">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1360.768@0.0.1366.768" timestamp="1605229210599" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1605265882574" />
   </component>
 </project>

@@ -33,7 +33,7 @@ export default function Portfolio() {
                 <p className="p-4 font-light text-lg">Enter your email address and I'll let you know as soon as it's ready.</p>
                 <form action="https://send.pageclip.co/ttd8Wu0NdCin8JApKZbTShVDYExnCsgA" className="pageclip-form w-full max-w-sm mx-auto" method="post">
                     <div className="flex items-center border-b border-teal-900 py-2">
-                        <input id="email" name="Email" className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="email" placeholder="Please enter your email" aria-label="Full name" />
+                        <input id="email" name="Email" className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="email" placeholder="Please enter your email" aria-label="Email" required />
                         <button className="pageclip-form__submit flex-shrink-0 bg-teal-700 hover:bg-teal-900 border-teal-700 hover:border-teal-900 text-base font-bold border-4 text-white py-1 px-2 rounded" type="submit">
                             <span>Notify Me</span>
                         </button>

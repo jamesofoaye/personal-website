@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d66d223a-908b-48a0-aec0-ff8ce3df78e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d66d223a-908b-48a0-aec0-ff8ce3df78e3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +40,7 @@
       <updated>1605228790267</updated>
       <workItem from="1605228839099" duration="417000" />
       <workItem from="1605265585508" duration="1074000" />
-      <workItem from="1605387510269" duration="723000" />
+      <workItem from="1605387510269" duration="1028000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the portfolio page">
       <created>1605229179957</created>
@@ -51,7 +49,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605229179957</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated the node packages">
+      <created>1605389579823</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605389579823</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -59,13 +64,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated the portfolio page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the portfolio page" />
+    <MESSAGE value="Updated the node packages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the node packages" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="293" y="0" key="CommitChangelistDialog2" timestamp="1605229170761">
+    <state x="293" y="0" key="CommitChangelistDialog2" timestamp="1605389574953">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="293" y="0" key="CommitChangelistDialog2/0.0.1366.768/1366.0.1360.768@0.0.1366.768" timestamp="1605229170761" />
+    <state x="293" y="0" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1605389574953" />
+    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1605389477128">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1605389477128" />
     <state x="543" y="282" key="Github.ShareDialog" timestamp="1605228973139">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -74,10 +85,14 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="321" y="145" key="MultipleFileMergeDialog/0.0.1366.768@0.0.1366.768" timestamp="1605266021705" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1605265882574">
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2" timestamp="1605389697256">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1360.768@0.0.1366.768" timestamp="1605229210599" />
-    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1605265882574" />
+    <state x="275" y="117" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1605389697256" />
+    <state x="500" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605389623310">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="500" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1605389623310" />
   </component>
 </project>

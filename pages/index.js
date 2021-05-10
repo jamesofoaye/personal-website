@@ -12,11 +12,11 @@ export default function IndexPage() {
       <Nav />
       <div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0 lg:pb-12">
         <div className="w-full  lg:w-2/5">
-          <img src="./mypic.jpg" className="rounded-none lg:rounded-lg hidden lg:block" />
+          <img src="./mypic.jpg" className="rounded-none lg:rounded-lg hidden shadow-2xl lg:block" />
         </div>
         <div className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-75 mx-6 mt-8 lg:mt-0 lg:mx-0">
           <div className="p-4 md:p-12 text-center lg:text-left">
-            <div className="image-for-mobile-view block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center">
+            <div className="image-for-mobile-view block lg:hidden rounded-full mx-auto -mt-16 h-48 w-48 bg-cover bg-center">
               <style jsx>
                 {`
                   .image-for-mobile-view {

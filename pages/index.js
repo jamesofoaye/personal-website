@@ -8,10 +8,10 @@ export default function IndexPage() {
       <Head>
         <title>Ofori James Ayerakwa</title>
         <link rel="icon" href="/favicon.ico" />
-    <meta name="keywords" content="Ofori, James, Ayerakwa, Ofori James, James Ayerakwa, Ofori James Ayerakwa, Frontend Web Developer, UI Designer, jamesofoaye">
+    <meta name="keywords" content="Ofori, James, Ayerakwa, Ofori James, James Ayerakwa, Ofori James Ayerakwa, Frontend Web Developer, UI Designer, jamesofoaye" />
     <meta name="description" content="A self-taught Frontend developer who develops application with HTML, CSS,
-            JavaScript (React.js) with a strong eye for innovative design and a keen understanding of techniques geared toward optimum user experience">
-  <meta name="author" content="Ofori James Ayerakwa">
+            JavaScript (React.js) with a strong eye for innovative design and a keen understanding of techniques geared toward optimum user experience" />
+  <meta name="author" content="Ofori James Ayerakwa" />
       </Head>
       <Nav />
       <div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0 lg:pb-12">

@@ -39,7 +39,7 @@ export default function IndexPage() {
 
             <div className="pt-12 pb-8">
               <button className="bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-full">
-                <Link href="mailto:jamesofoaye@gmail.com">Get In Touch via Email</Link>
+                <Link href="mailto:jamesofoaye@gmail.com" target="_blank">Get In Touch via Email</Link>
               </button>
             </div>
 

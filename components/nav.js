@@ -29,7 +29,7 @@ export default function Nav() {
         <ul className="flex justify-between items-center space-x-4 px-12 pb-8 lg:p-6">
           <li>
             <button className="bg-teal-700 hover:bg-teal-900 text-white font-normal lg:font-bold py-2 px-4 rounded-full">
-              <Link href="./my-resume.pdf">Resume / CV</Link>
+              <Link href="./Ofori James Ayerakwa Web Dev Resume.pdf">Resume / CV</Link>
             </button>
           </li>
           <li>

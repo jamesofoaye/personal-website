@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Nav from '../components/nav'
 import Link from 'next/link'
+import styles from '../styles/index.module.css'
 
 export default function IndexPage() {
   return (
@@ -9,8 +10,47 @@ export default function IndexPage() {
         <title>Ofori James Ayerakwa</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Nav />
-      <div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0 lg:pb-12">
+
+      <main className={`relative h-screen ${styles.bgImage}`}>
+        <header className="h-24 sm:h-32 flex items-center z-30 w-full">
+          <div className="container mx-auto px-6 flex items-center justify-between">
+            <div className="uppercase text-gray-800 font-semibold text-xl flex items-center">
+              Ofori James Ayerakwa
+            </div>
+            <div className="flex items-center">
+              <nav className="font-sen text-gray-800 uppercase text-lg lg:flex items-center hidden">
+                <div className="uppercase text-gray-800 text-3xl font-semibold flex items-center">
+                  <svg width="25" height="25" viewBox="0 0 1792 1792" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1664 1504v-768q-32 36-69 66-268 206-426 338-51 43-83 67t-86.5 48.5-102.5 24.5h-2q-48 0-102.5-24.5t-86.5-48.5-83-67q-158-132-426-338-37-30-69-66v768q0 13 9.5 22.5t22.5 9.5h1472q13 0 22.5-9.5t9.5-22.5zm0-1051v-24.5l-.5-13-3-12.5-5.5-9-9-7.5-14-2.5h-1472q-13 0-22.5 9.5t-9.5 22.5q0 168 147 284 193 152 401 317 6 5 35 29.5t46 37.5 44.5 31.5 50.5 27.5 43 9h2q20 0 43-9t50.5-27.5 44.5-31.5 46-37.5 35-29.5q208-165 401-317 54-43 100.5-115.5t46.5-131.5zm128-37v1088q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1472q66 0 113 47t47 113z">
+                    </path>
+                  </svg>
+                  <span className="text-xl ml-3 mt-1">
+                    jamesofoaye@gmail.com
+                  </span>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </header>
+        <div className="flex relative z-20 items-center">
+          <div className="container mx-auto px-6 flex flex-col justify-between items-center relative py-4">
+            <div className="flex flex-col">
+              <img src="/new-pic.jpg" className="rounded-full w-24 h-24 mx-auto" />
+              <p className="text-6xl my-6 font-bold text-center">
+                Hi, I&apos;m James
+              </p>
+              <p className="max-w-3xl text-3xl mx-auto text-gray-800 text-center py-2">
+                A Frontend developer with a strong eye for innovative design and a keen understanding of
+                techniques geared toward optimum user experience. I'm passionate about continuously
+                learning in the tech industry and supporting people to solve their technical problems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+
+      {/**<div className="max-w-4xl flex items-center flex-wrap mx-auto lg:my-0 lg:pb-12">
         <div className="w-full  lg:w-2/5">
           <img src="./mypic.jpg" className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
         </div>
@@ -36,6 +76,7 @@ export default function IndexPage() {
             Foundation (LEMP's Foundation Ghana) as their Chief Technology Officer (C.T.O). Recently completed
             the Google IT Support Professional Certificate. I'm currently enrolled in the Google IT Automation with
             Python professional certificate.</p>
+            
 
             <div className="pt-12 pb-8">
               <button className="bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-full">
@@ -82,7 +123,7 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-      </div>
+              </div>*/}
     </div>
   )
 }

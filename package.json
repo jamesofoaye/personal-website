@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@formspree/react": "^2.2.3",
+    "daisyui": "^1.16.2",
     "framer": "^2.0.0-beta.13",
     "framer-motion": "^5.2.1",
     "next": "latest",

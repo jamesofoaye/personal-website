@@ -6,8 +6,8 @@ export default function IndexPage() {
     <div>
       <Head>
         <title>Ofori James Ayerakwa</title>
-
-        <meta charSet="UTF-8" />
+        
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
@@ -55,7 +55,11 @@ export default function IndexPage() {
           <div className="flex relative items-center">
             <div className="container mx-auto px-6 flex flex-col justify-between pt-4">
               <div className="flex flex-col">
-                <img src="pictures/new-pic.jpg" className="rounded-full h-40 w-40 mx-auto" />
+                <img 
+                  src="pictures/new-pic.jpg" 
+                  className="rounded-full h-40 w-40 mx-auto"
+                  alt="Ofori James Ayerakwa Picture"
+                />
                 <h1 className="text-2xl md:text-6xl my-6 font-bold text-center">
                   Hi, I&apos;m James
                 </h1>
@@ -81,25 +85,53 @@ export default function IndexPage() {
               <div className="w-px h-full bg-gray-300 lg:w-full lg:h-px" />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/HTML.svg" className="md:h-full" />
+              <img 
+                src="/tools-icons/HTML.svg" 
+                className="md:h-full"
+                alt="HTML logo"
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/CSS.svg" className="h-full" />
+              <img 
+                src="/tools-icons/CSS.svg" 
+                className="h-full"
+                alt="CSS logo"
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/Javascript.svg" className="h-full" />
+              <img 
+                src="/tools-icons/Javascript.svg" 
+                className="h-full" 
+                alt="JavaScript logo"
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/JQuery.svg" className="h-full" />
+              <img 
+                src="/tools-icons/JQuery.svg" 
+                className="h-full"
+                alt="JQuery logo" 
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/React.svg" className="h-full" />
+              <img 
+                src="/tools-icons/React.svg" 
+                className="h-full"
+                alt="React logo" 
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/NextJs.svg" className="h-full" />
+              <img 
+                src="/tools-icons/NextJs.svg" 
+                className="h-full"
+                alt="NextJs logo" 
+              />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/tools-icons/Firebase.svg" className="h-full" />
+              <img 
+                src="/tools-icons/Firebase.svg" 
+                className="h-full"
+                alt="Firebase logo" 
+              />
             </div>
           </div>
         </section>
@@ -120,7 +152,11 @@ export default function IndexPage() {
               <div className="w-px h-full bg-gray-300 lg:w-full lg:h-px" />
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/company-logos/seguah.jpg" className="h-24 mx-auto md:h-auto" />
+              <img 
+                src="/company-logos/seguah.jpg" 
+                className="h-24 mx-auto md:h-auto"
+                alt="Seguah logo"
+              />
               <a href="https://seguah.com" target="_blank">
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Seguah</h3>
               </a>
@@ -129,7 +165,11 @@ export default function IndexPage() {
               </p>
             </div>
             <div className="p-5 duration-300 transform bg-black border rounded shadow-sm hover:-translate-y-2">
-              <img src="/company-logos/mcat-global.svg" className="mt-10 h-24 mx-auto md:h-auto" />
+              <img 
+                src="/company-logos/mcat-global.svg" 
+                className="mt-10 h-24 mx-auto md:h-auto"
+                alt="MCAT Global logo"
+              />
               <a href="https://mcatglobal.com" target="_blank">
                 <h3 className="text-center text-white py-3 text-xl font-bold">
                   MCAT <span className="text-red-600">Global</span>
@@ -140,7 +180,11 @@ export default function IndexPage() {
               </p>
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/company-logos/dawurobo.png" className="h-24 mx-auto md:h-auto" />
+              <img 
+                src="/company-logos/dawurobo.png" 
+                className="h-24 mx-auto md:h-auto"
+                alt="Dawurobo logo"
+              />
               <a href="https://dawurobo.com" target="_blank">
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Dawurobo</h3>
               </a>
@@ -153,7 +197,11 @@ export default function IndexPage() {
               </p>
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/company-logos/hexlen.svg" className="h-24 mx-auto md:h-auto" />
+              <img 
+                src="/company-logos/hexlen.svg" 
+                className="h-24 mx-auto md:h-auto"
+                alt="Hexlen logo"
+              />
               <a href="https://hexlen.com" target="_blank">
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Hexlen</h3>
               </a>
@@ -162,7 +210,11 @@ export default function IndexPage() {
               </p>
             </div>
             <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img src="/company-logos/skinplus-medspa.png" className="mt-10 h-24 mx-auto md:h-auto" />
+              <img 
+                src="/company-logos/skinplus-medspa.png" 
+                className="mt-10 h-24 mx-auto md:h-auto"
+                alt="SkinPlus MedSpa logo"
+              />
               <a href="https://skinplusofficial.com" target="_blank">
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">SkinPlus Medspa</h3>
               </a>

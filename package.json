@@ -7,17 +7,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "@formspree/react": "^2.2.3",
-    "framer": "^2.0.0-beta.13",
-    "framer-motion": "^5.2.1",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "postcss-flexbugs-fixes": "4.2.1",
-    "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.7.4"
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   },
   "license": "MIT"
 }

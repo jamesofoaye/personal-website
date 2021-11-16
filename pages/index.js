@@ -209,7 +209,7 @@ export default function IndexPage() {
                 <a 
                   href="https://safe.dawurobo.com" 
                   target="_blank" 
-                  className="text-blue-400"
+                  className="text-blue-600"
                   title="Dawurobo Safe Website Link"
                 >
                   Dawurobo Safe,

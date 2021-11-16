@@ -291,7 +291,7 @@ export default function IndexPage() {
 
                 <a
                   className="flex items-center mx-2 text-white hover:text-teal-700"
-                  href="https://twitter.com/iamrholing"
+                  href="https://twitter.com/jamesofoaye"
                   target="_blank"
                   title="James' Twitter Link"
                 >

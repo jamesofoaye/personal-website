@@ -35,7 +35,11 @@ export default function IndexPage() {
                 Ofori James Ayerakwa
               </div>
               <div className="md:flex md:items-center hidden">
-                <a href="mailto:jamesofoaye@gmail.com?subject=Hi James, Found you via your website☺">
+                <a 
+                  href="mailto:jamesofoaye@gmail.com?subject=Hi James, Found you via your website☺"
+                  target="_blank"
+                  title="James' email Link"
+                >
                   <div className="font-sen text-gray-800 uppercase text-sm md:text-lg flex items-center">
                     <div className="uppercase text-gray-800 md:text-3xl font-semibold flex items-center">
                       <svg width="25" height="25" viewBox="0 0 1792 1792" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +161,11 @@ export default function IndexPage() {
                 className="h-24 mx-auto md:h-auto"
                 alt="Seguah logo"
               />
-              <a href="https://seguah.com" target="_blank">
+              <a 
+                href="https://seguah.com" 
+                target="_blank"
+                title="Seguah Website Link"
+              >
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Seguah</h3>
               </a>
               <p className="text-md text-gray-900 text-center">
@@ -170,7 +178,11 @@ export default function IndexPage() {
                 className="mt-10 h-24 mx-auto md:h-auto"
                 alt="MCAT Global logo"
               />
-              <a href="https://mcatglobal.com" target="_blank">
+              <a 
+                href="https://mcatglobal.com" 
+                target="_blank"
+                title="MCAT Global Website Link"
+              >
                 <h3 className="text-center text-white py-3 text-xl font-bold">
                   MCAT <span className="text-red-600">Global</span>
                 </h3>
@@ -185,12 +197,21 @@ export default function IndexPage() {
                 className="h-24 mx-auto md:h-auto"
                 alt="Dawurobo logo"
               />
-              <a href="https://dawurobo.com" target="_blank">
+              <a 
+                href="https://dawurobo.com" 
+                target="_blank"
+                title="Dawurobo Website Link"
+              >
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Dawurobo</h3>
               </a>
               <p className="text-md text-gray-900">
                 At Dawurobo, I develop {""}
-                <a href="https://safe.dawurobo.com" target="_blank" className="text-blue-400">
+                <a 
+                  href="https://safe.dawurobo.com" 
+                  target="_blank" 
+                  className="text-blue-400"
+                  title="Dawurobo Safe Website Link"
+                >
                   Dawurobo Safe,
                 </a> a web app that help individuals engage in a safe transaction.
                 I also maintain Dawurobo's Game and Main website.
@@ -202,7 +223,11 @@ export default function IndexPage() {
                 className="h-24 mx-auto md:h-auto"
                 alt="Hexlen logo"
               />
-              <a href="https://hexlen.com" target="_blank">
+              <a 
+                href="https://hexlen.com" 
+                target="_blank"
+                title="Hexlen Website Link"
+              >
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">Hexlen</h3>
               </a>
               <p className="text-md text-gray-900 text-center">
@@ -215,7 +240,11 @@ export default function IndexPage() {
                 className="mt-10 h-24 mx-auto md:h-auto"
                 alt="SkinPlus MedSpa logo"
               />
-              <a href="https://skinplusofficial.com" target="_blank">
+              <a 
+                href="https://skinplusofficial.com" 
+                target="_blank"
+                title="SKinPlus MedSpa Website Link"
+              >
                 <h3 className="text-center text-gray-900 py-3 text-xl font-bold">SkinPlus Medspa</h3>
               </a>
               <p className="text-md text-gray-900 text-center">
@@ -237,6 +266,7 @@ export default function IndexPage() {
                   className="flex items-center mx-2 text-white hover:text-teal-700"
                   href="https://www.linkedin.com/in/james-ayerakwa-ofori-212b9117a/"
                   target="_blank"
+                  title="James' LinkedIn Profile Link"
                 >
                   <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -250,6 +280,7 @@ export default function IndexPage() {
                   className="flex items-center mx-2 text-white hover:text-teal-700"
                   href="https://github.com/jamesofoaye"
                   target="_blank"
+                  title="James' Github Profile Link"
                 >
                   <svg className="h-5 w-5 fill-current" xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 512 512'>
@@ -262,6 +293,7 @@ export default function IndexPage() {
                   className="flex items-center mx-2 text-white hover:text-teal-700"
                   href="https://twitter.com/iamrholing"
                   target="_blank"
+                  title="James' Twitter Link"
                 >
                   <svg className="h-5 w-5 fill-current" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z" />
@@ -272,6 +304,7 @@ export default function IndexPage() {
                   className="flex items-center mx-2 text-white hover:text-teal-700"
                   href="https://api.whatsapp.com/send?phone=233555175699&text=Hello%20James%2C%20I%20found%20your%20number%20via%20your%20website."
                   target="_blank"
+                  title="James' WhatsApp Link"
                 >
                   <svg className="h-5 w-5 fill-current" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -282,6 +315,7 @@ export default function IndexPage() {
                   className="flex items-center mx-2 text-white hover:text-teal-700"
                   href="mailto:jamesofoaye@gmail.com?subject=Hi James, Found you via your website☺"
                   target="_blank"
+                  title="James' email Link"
                 >
                   <svg className="h-5 w-5 fill-current" viewBox="0 0 1792 1792" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1664 1504v-768q-32 36-69 66-268 206-426 338-51 43-83 67t-86.5 48.5-102.5 24.5h-2q-48 0-102.5-24.5t-86.5-48.5-83-67q-158-132-426-338-37-30-69-66v768q0 13 9.5 22.5t22.5 9.5h1472q13 0 22.5-9.5t9.5-22.5zm0-1051v-24.5l-.5-13-3-12.5-5.5-9-9-7.5-14-2.5h-1472q-13 0-22.5 9.5t-9.5 22.5q0 168 147 284 193 152 401 317 6 5 35 29.5t46 37.5 44.5 31.5 50.5 27.5 43 9h2q20 0 43-9t50.5-27.5 44.5-31.5 46-37.5 35-29.5q208-165 401-317 54-43 100.5-115.5t46.5-131.5zm128-37v1088q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1472q66 0 113 47t47 113z">

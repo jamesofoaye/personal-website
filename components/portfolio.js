@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Nav from '../components/nav'
+import Nav from './nav'
 
 export default function Portfolio() {
     return (

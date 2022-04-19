@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/index.module.css'
 import ToolsCard from '../components/toolsCard'
+import ProjectCard from '../components/projectCard'
 
+//Tools I Use
 const tools = [
   {
     logo: '/tools-icons/HTML.svg',
@@ -65,13 +67,45 @@ const tools = [
   },
 ]
 
+//Some of my projects
 const projects = [
   {
-    title: 'Tailwind CSS',
-    description: 'Tailwind CSS is a utility-first CSS framework for rapidly building custom, high performance, and accessible websites.',
-    link: 'https://tailwindcss.com/',
-    image: '/projects-icons/tailwindcss.png',
+    title: 'SkinPlus Medspa Website',
+    description: 'SkinPlus Medspa is a skin care and medical spa company that provides a wide range of skin care products and services. The website is built with React, Next.js, Chakra UI and Firebase.',
+    link: 'https://skinplusofficial.com/',
+    image: '/projects-screenshot/skinplus-main.png',
+  },
+  {
+    title: 'Appointment Management Portal for SkinPlus Medspa',
+    description: 'Appoinment management portal for Skinplus Medspa. The portal is used to manage the appointments of the clients. The website is built with React, Next.js, Chakra UI, Google Cloud Functions and Firebase.',
+    link: 'https://skinplusofficial.com/',
+    image: '/projects-screenshot/skinplus-appointment.png',
+  },
+  {
+    title: 'Cron Job for SkinPlus Medspa',
+    description: 'Build a cron job to send SMS reminder to the clients about their upcoming appointments. The cron job is built with JavaScript, Google Cloud Functions and Firebase.',
+    link: 'https://skinplusofficial.com/',
+    image: '/projects-screenshot/skinplus-cronjob.png',
     className: 'h-full'
+  },
+  {
+    title: 'Dawurobo Safe',
+    description: 'Dawurobo Safe is a fraud prevention platform that helps users transact with unknown sellers and buyers safely. The website is built with React, Next.js, Chakra UI and Firebase.',
+    link: 'https://safe.dawurobo.com/',
+    image: '/projects-screenshot/safe.png',
+  },
+  {
+    title: 'MCAT Global',
+    description: 'MCAT Global is an Oil and Gas marketing company that provides services to the oil and gas industry. The website is built with HTML, Tailwind CSS, JavaScript, JQuery and Firebase.',
+    link: 'https://mcatglobal.com/',
+    image: '/projects-screenshot/mcat-global.png',
+    className: 'h-full'
+  },
+  {
+    title: 'Fabra Online',
+    description: 'Fabra Online is a free online marketplace for finding the best deals, events, and services in your area.  The website is built with React, Next.js, Mantine UI, and Firebase.',
+    link: 'https://fabra-online-test.vercel.app/',
+    image: '/projects-screenshot/fabra-online.png',
   },
 ]
 
@@ -285,6 +319,26 @@ export default function IndexPage() {
                 For SkinPlus Medspa, I developed and maintained their website.
               </p>
             </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-4 mx-auto md:px-24 lg:px-8 lg:pt-10 lg:pb-8">
+          <div className="max-w-xl mb-10 mx-auto text-center lg:max-w-2xl md:mb-12">
+            <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold text-gray-900 sm:text-5xl mx-auto capitalize">
+              What are some of the projects you&apos;ve worked on?
+            </h2>
+          </div>
+
+          <div className="relative grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-3 grid-cols-1">
+            {projects.map((project, index) => (
+              <ProjectCard 
+                key={index} 
+                title={project.title}
+                description={project.description}
+                link={project.link}
+                image={project.image}
+              />        
+            ))}
           </div>
         </section>
 

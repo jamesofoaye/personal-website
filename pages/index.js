@@ -1,5 +1,65 @@
 import Head from 'next/head'
 import styles from '../styles/index.module.css'
+import ToolsCard from '../components/toolsCard'
+
+const tools = [
+  {
+    logo: '/tools-icons/HTML.svg',
+    title: 'HTML',
+    className: 'md:h-full'
+  },
+  {
+    logo: '/tools-icons/CSS.svg',
+    title: 'CSS',
+    className: 'h-full'
+  },
+  {
+    logo: '/tools-icons/tailwindcss-mark.svg',
+    title: 'Tailwind CSS',
+    className: 'h-full'
+  },
+  {
+    logo: '/tools-icons/JavaScript.svg',
+    title: 'JavaScript',
+    className: 'h-full' 
+  },
+  {
+    logo: '/tools-icons/JQuery.svg',
+    title: 'JQuery',
+    className: 'h-full' 
+  },
+  {
+    logo: '/tools-icons/Git.svg',
+    title: 'Git',
+    className: 'h-full py-12' 
+  },
+  {
+    logo: '/tools-icons/github.svg',
+    title: 'Github',
+    className: 'h-full py-7' 
+  },
+  {
+    logo: '/tools-icons/React.svg',
+    title: 'React',
+    className: 'h-full'
+  },
+  {
+    logo: '/tools-icons/NextJs.svg',
+    title: 'Next.js',
+    className: 'h-full'
+  },
+  {
+    logo: '/tools-icons/Firebase.svg',
+    title: 'Firebase',
+    className: 'h-full'
+  },
+  {
+    logo: '/tools-icons/GCP.svg',
+    title: 'Google Cloud Platform',
+    className: 'h-full'
+  },
+]
+
 
 export default function IndexPage() {
   return (
@@ -7,7 +67,7 @@ export default function IndexPage() {
       <Head>
         <title>Ofori James Ayerakwa</title>
         
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
@@ -88,55 +148,14 @@ export default function IndexPage() {
             <div className="absolute inset-0 md:flex items-center justify-center hidden">
               <div className="w-px h-full bg-gray-300 lg:w-full lg:h-px" />
             </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/HTML.svg" 
-                className="md:h-full"
-                alt="HTML logo"
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/CSS.svg" 
-                className="h-full"
-                alt="CSS logo"
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/Javascript.svg" 
-                className="h-full" 
-                alt="JavaScript logo"
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/JQuery.svg" 
-                className="h-full"
-                alt="JQuery logo" 
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/React.svg" 
-                className="h-full"
-                alt="React logo" 
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/NextJs.svg" 
-                className="h-full"
-                alt="NextJs logo" 
-              />
-            </div>
-            <div className="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <img 
-                src="/tools-icons/Firebase.svg" 
-                className="h-full"
-                alt="Firebase logo" 
-              />
-            </div>
+            {tools.map((tool, index) => (
+              <ToolsCard 
+                key={index} 
+                toolsTitle={tool.title}
+                logo={tool.logo}
+                className={tool.className}
+              />        
+            ))}
           </div>
         </section>
 

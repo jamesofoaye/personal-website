@@ -58,6 +58,21 @@ const tools = [
     title: 'Google Cloud Platform',
     className: 'h-full'
   },
+  {
+    logo: '/tools-icons/pwa.svg',
+    title: 'Progressive Web Application',
+    className: 'h-full'
+  },
+]
+
+const projects = [
+  {
+    title: 'Tailwind CSS',
+    description: 'Tailwind CSS is a utility-first CSS framework for rapidly building custom, high performance, and accessible websites.',
+    link: 'https://tailwindcss.com/',
+    image: '/projects-icons/tailwindcss.png',
+    className: 'h-full'
+  },
 ]
 
 
@@ -88,7 +103,7 @@ export default function IndexPage() {
       </Head>
 
       <main>
-        <section className={`relative h-auto md:h-screen ${styles.bgImage}`}>
+        <section className={`relative h-auto ${styles.bgImage}`}>
           <nav className="h-24 sm:h-32 text-center md:flex md:items-center md:z-30 md:w-full">
             <div className="md:container mx-auto px-6 md:flex md:items-center md:justify-between">
               <div className="uppercase text-gray-800 font-semibold text-xl pt-10 md:pt-0 md:flex md:items-center">
@@ -121,7 +136,7 @@ export default function IndexPage() {
               <div className="flex flex-col">
                 <img 
                   src="pictures/new-pic.jpg" 
-                  className="rounded-full h-40 w-40 mx-auto"
+                  className="rounded-full h-40 w-40 md:h-80 md:w-80 mx-auto"
                   alt="Ofori James Ayerakwa Picture"
                 />
                 <h1 className="text-2xl md:text-6xl my-6 font-bold text-center">

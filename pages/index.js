@@ -21,7 +21,7 @@ const tools = [
     className: 'h-full'
   },
   {
-    logo: '/tools-icons/JavaScript.svg',
+    logo: '/tools-icons/Javascript.svg',
     title: 'JavaScript',
     className: 'h-full' 
   },

@@ -104,7 +104,7 @@ const projects = [
   {
     title: 'Fabra Online',
     description: 'Fabra Online is a free online marketplace for finding the best deals, events, and services in your area.  The website is built with React, Next.js, Mantine UI, and Firebase.',
-    link: 'https://www.fabraonline.com/',
+    link: 'https://fabraonline.com/',
     image: '/projects-screenshot/fabra-online.png',
   },
 ]

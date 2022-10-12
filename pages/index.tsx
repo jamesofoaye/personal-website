@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Footer } from "../components";
+import { Layout, Footer } from "../components";
 // import styles from '../styles/index.module.css'
 // import ToolsCard from '../components/toolsCard'
 // import ProjectCard from '../components/projectCard'
@@ -131,12 +131,15 @@ export default function IndexPage() {
           techniques geared toward optimum user experience. I'm passionate about continuously
           learning in the tech industry and supporting people to solve their technical problems."
 				/>
-				<meta property="og:image" content="https://ofori-james-ayerakwa.me/pictures/new-pic.jpg" />
+				<meta
+					property="og:image"
+					content="https://ofori-james-ayerakwa.me/pictures/new-pic.jpg"
+				/>
 
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
+			<Layout>
 				{/* <section className={`relative h-auto ${styles.bgImage}`}>
 					<nav className="h-24 sm:h-32 text-center md:flex md:items-center md:z-30 md:w-full">
 						<div className="md:container mx-auto px-6 md:flex md:items-center md:justify-between">
@@ -425,7 +428,7 @@ export default function IndexPage() {
 						</div>
 					</div>
 				</footer> */}
-			</main>
+			</Layout>
 		</div>
 	);
 }

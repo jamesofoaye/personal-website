@@ -8,7 +8,12 @@ const colors = {
 	},
 };
 
-const theme = extendTheme({ colors });
+const fonts = {
+	heading: `'Commissioner', sans-serif`,
+	body: "Commissioner, sans-serif",
+};
+
+const theme = extendTheme({ colors, fonts });
 
 function MyApp({ Component, pageProps }) {
 	return (

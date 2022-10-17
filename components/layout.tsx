@@ -1,16 +1,6 @@
-import { FC, ReactNode } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
+import * as React from "react";
 
-interface layoutProps {
-	children: ReactNode;
-}
-
-const Layout: FC<layoutProps> = ({ children }) => {
-	return (
-		<Box as="main" maxW={"7xl"} mx="auto">
-			{children}
-		</Box>
-	);
+export const Layout = (props: BoxProps) => {
+	return <Box py="3" px="4" {...props} />;
 };
-
-export default Layout;

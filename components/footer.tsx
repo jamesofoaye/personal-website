@@ -10,7 +10,7 @@ export const Footer = (props: BoxProps) => {
 		<Box as="footer" role="contentinfo" {...props}>
 			<Layout minH="20">
 				<Stack spacing={{ base: "4", md: "5" }}>
-					<Stack justify="space-between" direction="row" align="center">
+					<Stack justify="space-between" direction="row" align="center" maxW={'7xl'} mx={'auto'} w="100%">
 						<Text fontSize="sm" color="subtle">
 							&copy; {new Date().getFullYear()} Ofori James Ayerakwa.
 						</Text>

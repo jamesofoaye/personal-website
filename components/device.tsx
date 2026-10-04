@@ -55,7 +55,7 @@ export function BrowserFrame({
         <span className="size-2.5 rounded-full bg-[#febc2e]" />
         <span className="size-2.5 rounded-full bg-[#28c840]" />
         {url && (
-          <span className="ms-3 truncate rounded-md bg-white px-3 py-0.5 text-[11px] text-faint">
+          <span className="ms-3 truncate rounded-md bg-white px-3 py-0.5 text-xs text-faint">
             {url}
           </span>
         )}
@@ -99,6 +99,9 @@ export function VentureCover({
       <div className={`relative isolate overflow-hidden ${className}`} style={tint}>
         <div
           className={`absolute ${size === "hero" ? "inset-x-[6%] top-[10%]" : "inset-x-[7%] top-[12%]"}`}
+          style={{
+            transform: "translate(calc(var(--tilt-x, 0) * 10px), calc(var(--tilt-y, 0) * 8px))",
+          }}
         >
           <BrowserFrame
             shot={shots[0]!}
@@ -111,7 +114,9 @@ export function VentureCover({
     );
   }
 
-  const fan = (count: number, cls: string, hero: boolean) => {
+  // Phones nearer the middle sit "closer", so they move more when the cover
+  // tilts (see <Tilt>, which sets --tilt-x / --tilt-y).
+  const fan = (count: number, cls: string, hero: boolean, prio: boolean) => {
     const visible = shots.slice(0, Math.min(shots.length, count));
     const mid = (visible.length - 1) / 2;
     return (
@@ -123,14 +128,14 @@ export function VentureCover({
               key={shot.src}
               className={`${hero ? "w-[17%]" : "w-[30%]"} shrink-0`}
               style={{
-                transform: `translateY(${Math.abs(offset) * (hero ? 7 : 9)}%) rotate(${offset * 3}deg)`,
+                transform: `translate(calc(var(--tilt-x, 0) * ${(14 - Math.abs(offset) * 5).toFixed(1)}px), calc(${Math.abs(offset) * (hero ? 7 : 9)}% + var(--tilt-y, 0) * ${(10 - Math.abs(offset) * 3).toFixed(1)}px)) rotate(${offset * 3}deg)`,
                 marginInline: hero ? "1.2%" : "-2%",
                 zIndex: 10 - Math.abs(Math.round(offset)),
               }}
             >
               <PhoneFrame
                 shot={shot}
-                priority={priority && i === 0}
+                priority={prio && i === 0}
                 sizes={hero ? "(min-width: 1024px) 240px, 30vw" : "(min-width: 768px) 200px, 30vw"}
               />
             </div>
@@ -144,11 +149,12 @@ export function VentureCover({
     <div className={`relative isolate overflow-hidden ${className}`} style={tint}>
       {size === "hero" ? (
         <>
-          {fan(3, "flex md:hidden", false)}
-          {fan(5, "hidden md:flex", true)}
+          {/* preload only the phone layout; most visitors are on phones */}
+          {fan(3, "flex md:hidden", false, priority)}
+          {fan(5, "hidden md:flex", true, false)}
         </>
       ) : (
-        fan(3, "flex", false)
+        fan(3, "flex", false, priority)
       )}
     </div>
   );

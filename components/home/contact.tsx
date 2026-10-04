@@ -8,7 +8,7 @@ export function Contact() {
     <section
       id="contact"
       data-section="contact"
-      className="relative isolate overflow-hidden px-5 py-32 sm:px-8 sm:py-44"
+      className="relative isolate overflow-hidden px-5 py-24 sm:px-8 sm:py-44"
     >
       <div
         aria-hidden
@@ -29,16 +29,16 @@ export function Contact() {
             Send me a message about a product idea, an AI problem or something you are building for
             the UAE or Ghana. I read every message and I will get back to you.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <EmailLink className="inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-8 py-3.5 text-lg text-white transition-colors hover:bg-white hover:text-ink">
+          <div className="mx-auto mt-10 grid max-w-md grid-cols-2 gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center">
+            <EmailLink className="col-span-2 inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-ink px-8 py-3.5 text-lg text-white transition-colors hover:bg-white hover:text-ink">
               Send an email
             </EmailLink>
-            <CopyEmail className="rounded-full border border-ink px-8 py-3.5 text-lg text-ink transition-colors hover:bg-ink hover:text-white" />
+            <CopyEmail className="rounded-full border border-ink px-4 py-3.5 text-base sm:px-8 sm:text-lg text-ink transition-colors hover:bg-ink hover:text-white" />
             <a
               href={PERSON.links.linkedin}
               target="_blank"
               rel="me noopener"
-              className="rounded-full border border-ink px-8 py-3.5 text-lg text-ink transition-colors hover:bg-ink hover:text-white"
+              className="rounded-full border border-ink px-4 py-3.5 text-center text-base text-ink sm:px-8 sm:text-lg transition-colors hover:bg-ink hover:text-white"
             >
               LinkedIn ↗
             </a>

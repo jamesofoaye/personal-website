@@ -31,5 +31,6 @@ export function trackEvent(name: string, props: Record<string, EventValue> = {})
   } catch {
     /* analytics must never break the page */
   }
-  if (process.env.NODE_ENV === "development") console.debug("[track]", name, Object.fromEntries(entries));
+  if (process.env.NODE_ENV === "development")
+    console.debug("[track]", name, Object.fromEntries(entries));
 }

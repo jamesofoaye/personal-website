@@ -3,20 +3,27 @@
  * and AI answer engines can join the person, the site and each project into
  * one graph.
  */
-import { ARCHIVE, VENTURES, type Venture } from "./content";
+import { VENTURES, type Venture } from "./content";
 import { FAQ } from "./faq";
 import { PERSON, SITE_URL } from "./site";
 
 export const PERSON_ID = `${SITE_URL}/#person`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+/** Bump with content changes; used as dateModified. */
+export const CONTENT_UPDATED = "2026-10-04";
+const orgId = (v: Venture) => `${SITE_URL}/#org-${v.slug}`;
+const isFounded = (v: Venture) => /founder/i.test(v.role);
 
-const orgRef = (v: Venture) =>
-  v.url
-    ? { "@type": "Organization", name: v.name, url: v.url }
-    : { "@type": "Organization", name: v.name };
+const orgRef = (v: Venture) => ({
+  "@type": "Organization",
+  "@id": orgId(v),
+  name: v.name,
+  ...(v.url ? { url: v.url } : {}),
+  ...(isFounded(v) ? { founder: { "@id": PERSON_ID } } : {}),
+});
 
 export function personNode() {
-  const founded = VENTURES.filter((v) => /founder/i.test(v.role)).map(orgRef);
+  const founded = VENTURES.filter(isFounded).map(orgRef);
   return {
     "@type": "Person",
     "@id": PERSON_ID,
@@ -63,7 +70,8 @@ export function personNode() {
       "Right-to-left and Arabic interfaces",
       "Technical SEO",
     ],
-    sameAs: [PERSON.links.linkedin, PERSON.links.github],
+    sameAs: [PERSON.links.linkedin, PERSON.links.github, PERSON.links.x],
+    mainEntityOfPage: `${SITE_URL}/about`,
   };
 }
 
@@ -95,24 +103,17 @@ export function profilePageGraph(path: string, name: string) {
         isPartOf: { "@id": WEBSITE_ID },
         mainEntity: { "@id": PERSON_ID },
         inLanguage: "en",
+        dateModified: CONTENT_UPDATED,
       },
       {
         "@type": "ItemList",
         name: "Projects by James Ofori Ayerakwa",
-        itemListElement: [
-          ...VENTURES.map((v, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            url: `${SITE_URL}/work/${v.slug}`,
-            name: v.name,
-          })),
-          ...ARCHIVE.map((a, i) => ({
-            "@type": "ListItem",
-            position: VENTURES.length + i + 1,
-            url: a.url,
-            name: a.name,
-          })),
-        ],
+        itemListElement: VENTURES.map((v, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${SITE_URL}/work/${v.slug}`,
+          name: v.name,
+        })),
       },
     ],
   };
@@ -120,17 +121,26 @@ export function profilePageGraph(path: string, name: string) {
 
 export function caseStudyGraph(v: Venture) {
   const url = `${SITE_URL}/work/${v.slug}`;
-  const isApp = ["hisab", "dawurobo"].includes(v.slug);
   const isVideo = v.slug === "oja-studios";
+  const app: Record<string, [string, string, string]> = {
+    hisab: ["MobileApplication", "FinanceApplication", "iOS, Android"],
+    dawurobo: ["MobileApplication", "BusinessApplication", "iOS, Android, Web"],
+    "personal-vpn": ["MobileApplication", "UtilitiesApplication", "Android"],
+    verinvo: ["WebApplication", "BusinessApplication", "Web"],
+    drivinginstructor: ["WebApplication", "EducationalApplication", "Web"],
+  };
+  const [type, category, os] = app[v.slug] ?? ["SoftwareApplication", "BusinessApplication", "Web"];
   const subject = isVideo
-    ? { "@type": "Organization", name: v.name, url: v.url, founder: { "@id": PERSON_ID } }
+    ? orgRef(v)
     : {
-        "@type": isApp ? "MobileApplication" : "SoftwareApplication",
+        "@type": type,
         name: v.name,
-        url: v.url,
-        description: v.summary,
-        applicationCategory: isApp ? "FinanceApplication" : "BusinessApplication",
-        operatingSystem: isApp ? "iOS, Android" : "Web",
+        ...(v.url ? { url: v.url } : {}),
+        description: v.tagline,
+        applicationCategory: category,
+        operatingSystem: os,
+        creator: { "@id": PERSON_ID },
+        ...(isFounded(v) ? { publisher: { "@id": orgId(v) } } : {}),
         ...(v.shots[0] ? { screenshot: `${SITE_URL}${v.shots[0].src}` } : {}),
       };
   return {
@@ -145,6 +155,9 @@ export function caseStudyGraph(v: Venture) {
         description: v.summary,
         author: { "@id": PERSON_ID },
         creator: { "@id": PERSON_ID },
+        publisher: { "@id": PERSON_ID },
+        mainEntityOfPage: url,
+        dateModified: CONTENT_UPDATED,
         inLanguage: "en",
         isPartOf: { "@id": WEBSITE_ID },
         about: subject,
@@ -155,8 +168,7 @@ export function caseStudyGraph(v: Venture) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Work", item: `${SITE_URL}/#work` },
-          { "@type": "ListItem", position: 3, name: v.name, item: url },
+          { "@type": "ListItem", position: 2, name: v.name, item: url },
         ],
       },
     ],

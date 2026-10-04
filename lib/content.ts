@@ -50,10 +50,11 @@ export const VENTURES: Venture[] = [
     role: "Lead Frontend Engineer · Oxinus Holdings (IHC Group)",
     period: "2024 — now",
     place: "Abu Dhabi",
-    kind: "National e-invoicing platform",
-    tagline: "Verinvo is the e-invoicing platform I work on every day at Oxinus.",
+    kind: "Accredited e-invoicing platform",
+    tagline:
+      "Verinvo helps UAE businesses send and receive e-invoices that meet the new national standard.",
     summary:
-      "I lead the frontend of Verinvo, the Ministry of Finance-accredited e-invoicing platform for the UAE's B2B and B2G compliance system. I also helped build Ask Verinvo, the AI agent inside the platform, together with our product and backend colleagues.",
+      "I lead the frontend of Verinvo, a Ministry of Finance-accredited platform for e-invoicing under the UAE's B2B and B2G system. I also helped build Ask Verinvo, the AI agent inside the platform, together with our product and backend colleagues.",
     accent: "#2B59C3",
     accent2: "#0E1A3A",
     gradient: ["#1E3A8A", "#2B59C3"],
@@ -129,7 +130,7 @@ export const VENTURES: Venture[] = [
     kind: "Financial wellness app",
     tagline: "Hisab is a financial wellness app that helps people in the UAE pay off their debt.",
     summary:
-      "Hisab is a financial wellness app for people living in the UAE. It puts all of someone's debts in one place, shows them their debt-free date and tells them which payment to make first. You don't need an account to use it, and your data stays on your phone.",
+      "Hisab is a financial wellness app for people living in the UAE. It puts all of someone's debts in one place, shows them their debt-free date and points out which payment to make first. You don't need an account to use it, and your data stays on your phone.",
     url: "https://gethisab.com",
     urlLabel: "gethisab.com",
     accent: "#1F8A70",
@@ -149,7 +150,7 @@ export const VENTURES: Venture[] = [
       phone("/work/hisab/privacy.webp", "Hisab's privacy and data settings"),
     ],
     metrics: [
-      { value: "1M", label: "UAE residents debt-free by 2030 is our mission" },
+      { value: "2030", label: "our goal: one million UAE residents debt-free" },
       { value: "4", label: "languages: English, Arabic, Hindi and Urdu" },
       { value: "0", label: "accounts needed to use the app" },
     ],
@@ -270,7 +271,7 @@ export const VENTURES: Venture[] = [
       },
       {
         title: "Growth from search",
-        body: "About two out of three learners who contact an instructor come straight from Google. All of that growth comes from technical and AI search work in English and Arabic.",
+        body: "About two out of three learners who contact an instructor come straight from Google. None of it comes from ads. It comes from search work in English and Arabic, for Google and for AI assistants.",
       },
     ],
     stack: ["Next.js", "TypeScript", "Tailwind", "PostHog", "Structured data", "Right-to-left UI"],
@@ -321,11 +322,11 @@ export const VENTURES: Venture[] = [
       },
       {
         title: "The Dawurobo X app",
-        body: "Dawurobo X is our app for customers and riders. It is live on the App Store and Google Play, and the latest release, 2.5, moved to native controls.",
+        body: "Dawurobo X is our app for customers and riders. It is live on the App Store and Google Play, and the latest release, 2.5, feels faster and more like a normal phone app.",
       },
       {
         title: "Keeping it reliable",
-        body: "I traced around 95 million monthly database reads back to queries with no limit on them, and I ran a responsible security disclosure from start to finish.",
+        body: "I found that badly written queries were causing about 95 million database reads a month, and I fixed them. I also handled a security report from an outside developer from start to finish.",
       },
     ],
     ai: [
@@ -351,7 +352,7 @@ export const VENTURES: Venture[] = [
     summary:
       "OJA Studios is a documentary production company I started in Ghana. Our main series, The Rise Of, follows Ghanaians and Africans who built something worth learning from, and our YouTube channel has more than 15,000 subscribers.",
     url: "https://www.youtube.com/@ojastudios",
-    urlLabel: "youtube.com/@ojastudios",
+    urlLabel: "YouTube @ojastudios",
     accent: "#B5432F",
     accent2: "#2A0F0A",
     gradient: ["#B5432F", "#E6AF2E"],
@@ -395,7 +396,8 @@ export const VENTURES: Venture[] = [
     period: "2026",
     place: "Google Cloud · Android",
     kind: "Self-hosted VPN",
-    tagline: "I built my own VPN because the free one I switched to wasn't good enough.",
+    tagline:
+      "I built my own VPN for my family's phones after the free one turned out to be slow and full of ads.",
     summary:
       "I paid for a family VPN plan from 2022 for me, my mum and my uncle. At the start of 2026 I stopped because of the cost, and the free VPN I moved to was full of ads and kept slowing everything down. So I built my own, using WireGuard on Google Cloud.",
     accent: "#1F2A44",
@@ -442,7 +444,7 @@ export const AI_SYSTEMS: { name: string; where: string; body: string; wide?: boo
   {
     name: "Ask Verinvo",
     where: "Verinvo",
-    body: "An AI agent inside the e-invoicing platform. It answers users' questions and can take actions for them, but only within what each user is allowed to do.",
+    body: "An AI agent inside the e-invoicing platform, which I built with colleagues across product, MCP tooling and backend. It answers users' questions and can take actions for them, but only within what each user is allowed to do.",
   },
   {
     name: "Oxigen MCP server",
@@ -478,7 +480,7 @@ export const EXPERIENCE = [
     org: "Oxinus Holdings (IHC Group)",
     place: "Abu Dhabi",
     period: "Feb 2024 — now",
-    note: "I lead the frontend of Verinvo and helped build Ask Verinvo and the Oxigen MCP server.",
+    note: "I lead the frontend of Verinvo. I built the Oxigen MCP server and helped build Ask Verinvo with the team.",
   },
   {
     role: "Co-founder & Product Lead",
@@ -492,7 +494,7 @@ export const EXPERIENCE = [
     org: "DrivingInstructor.ae",
     place: "Abu Dhabi",
     period: "2025 — now",
-    note: "I grew it to more than 5,000 visitors a month without paying for ads.",
+    note: "I built it to help learners in Abu Dhabi through the whole licence process, from finding an instructor to the road test.",
   },
   {
     role: "VP of Engineering & Equity Partner",
@@ -599,7 +601,7 @@ export const ARCHIVE: { name: string; note: string; stack: string; url: string; 
   ];
 
 export const HERO_STATS: Metric[] = [
-  { value: "6+", label: "years building production web and mobile apps" },
+  { value: "2020", label: "the year I started building production apps for a living" },
   { value: "GH₵3M+", label: "processed through payments I integrated" },
   { value: "5,000+", label: "monthly visitors with no ad spend" },
   { value: "4", label: "languages shipped, including Arabic" },

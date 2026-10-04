@@ -1,5 +1,6 @@
 "use client";
 
+import { ViewTransition } from "react";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
@@ -34,7 +35,7 @@ export function WorkIndex() {
       <SectionHeading
         eyebrow="A few projects so far"
         title="These are the products I work on."
-        intro="During the day I lead the frontend of a national e-invoicing platform. Outside of that I run my own products, lead engineering at a logistics company in Ghana and produce documentaries. Click any project to read how I built it."
+        intro="During the day I lead the frontend of an accredited e-invoicing platform. Outside of that I run my own products, lead engineering at a logistics company in Ghana and produce documentaries. Open any project to read how I built it."
       />
 
       <div
@@ -67,14 +68,16 @@ export function WorkIndex() {
                   className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 py-7 sm:gap-x-8 sm:py-9 md:grid-cols-[3rem_1.4fr_1.2fr_9rem_2.5rem]"
                 >
                   <span className="text-sm font-semibold text-faint">0{i + 1}</span>
-                  <span
-                    className={`w-fit max-w-full min-w-0 bg-clip-text pb-1 font-display break-words md:text-[clamp(1.9rem,4.4vw,3.6rem)] ${v.name.length > 12 ? "text-[clamp(1.25rem,6vw,3.6rem)]" : "text-[clamp(1.45rem,7.2vw,3.6rem)]"} leading-none text-transparent transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-2 md:group-hover:translate-x-4`}
-                    style={{
-                      backgroundImage: `linear-gradient(to right, ${v.gradient[0]}, ${v.gradient[1]})`,
-                    }}
-                  >
-                    {v.name}
-                  </span>
+                  <ViewTransition name={`case-title-${v.slug}`} share="morph" default="none">
+                    <span
+                      className={`w-fit max-w-full min-w-0 bg-clip-text pb-1 font-display break-words md:text-[clamp(1.9rem,4.4vw,3.6rem)] ${v.name.length > 12 ? "text-[clamp(1.25rem,6vw,3.6rem)]" : "text-[clamp(1.45rem,7.2vw,3.6rem)]"} leading-none text-transparent transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-2 md:group-hover:translate-x-4`}
+                      style={{
+                        backgroundImage: `linear-gradient(to right, ${v.gradient[0]}, ${v.gradient[1]})`,
+                      }}
+                    >
+                      {v.name}
+                    </span>
+                  </ViewTransition>
                   <span className="hidden text-sm text-muted md:block">
                     <span className="block text-ink">{v.kind}</span>
                     {v.role}

@@ -39,7 +39,17 @@ Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical U
 
 ## Design
 
-The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF2E`, Commissioner type, the JamesOfoAye wordmark, black section labels with a gold orb, outline pill buttons. The globe links Accra and Abu Dhabi; on devices without a GPU, or with reduced motion, it renders a still frame.
+The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF2E`, Commissioner type, the JamesOfoAye wordmark, black section labels with a gold orb, outline pill buttons.
+
+Motion and 3D:
+
+- **Globe** (`components/globe/globe.tsx`): the land dots fly in and assemble on load, an arc links Accra and Abu Dhabi, a gold orbit ring adds depth, the cities send a ripple across the land every few seconds, and a tap or click sends one from that spot. It turns toward Abu Dhabi as the hero scrolls away and leans toward the cursor on desktop. It loads when the browser is idle, after the hero text.
+- **Voice field** (`components/voice-field/`): a WebGL field of gold points behind the Applied AI section that moves like speech, a nod to Sawt. The cursor or a finger presses into it. It loads only when the section is close.
+- **Tilt** (`components/tilt.tsx`): case-study covers lean toward the cursor on desktop and tip as they scroll on phones; the phones inside move by depth.
+- **Page transitions**: React `<ViewTransition>` morphs a project name from the list (or the "Next" link) into the case-study heading, with a short crossfade for the page.
+- Every WebGL piece pauses off-screen, caps at 30fps on touch devices and renders one still frame under reduced motion or without a GPU. Add `?forcegl` to a URL to force animation in headless browsers.
+
+Phones get the globe on the first screen, swipe rows for the AI cards and older projects, a modal menu with email and LinkedIn, and a small sticky "Email me / LinkedIn" bar once the hero has scrolled away.
 
 ## SEO and AI answer engines
 
@@ -57,11 +67,12 @@ Most tracking is declarative: add `data-track="event_name"` and `data-track-<pro
 
 | Event | When it fires | Properties |
 |---|---|---|
-| `cta_clicked` | Hero and header calls to action | `cta`, `device` |
+| `cta_clicked` | Hero, header and sticky mobile bar calls to action | `cta`, `device` |
+| `ai_cards_swiped` / `archive_swiped` | Swiping the AI cards or older projects on a phone | `section`, `device` |
 | `nav_clicked` | Any nav link, desktop or mobile | `item`, `menu` |
 | `mobile_menu_opened` | The mobile menu opens | `device` |
 | `project_previewed` | Hovering a project on desktop (once per project) | `project`, `device` |
-| `project_opened` | Opening a case study from the list or "Next" | `project`, `from` |
+| `project_opened` | Opening a case study from the list, "Next" or "Previous" | `project`, `from` |
 | `screens_swiped` | Swiping the screenshot gallery on a case study | `project`, `device` |
 | `section_viewed` | A section crosses the middle of the screen (`data-section`) | `section`, `device` |
 | `scroll_depth` | 25, 50, 75 and 100% of a page | `percent`, `device` |

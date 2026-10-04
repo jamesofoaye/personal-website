@@ -73,9 +73,16 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
+  /* ink ring with a gold halo: visible on white (gold alone is ~2:1) */
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgb(230 175 46 / 0.55);
   border-radius: 4px;
+}
+
+[data-section="ai"] :focus-visible {
+  outline-color: var(--gold);
+  box-shadow: none;
 }
 
 /* Film grain: a quiet texture that keeps flat colour from feeling digital. */
@@ -223,6 +230,12 @@ html.lenis body {
 }
 
 /* Hero entrance in pure CSS so it plays before hydration (keeps LCP fast). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -247,4 +260,43 @@ html.lenis body {
 .word-up {
   display: inline-block;
   animation: word-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Page transitions (React <ViewTransition>): a quick crossfade for the page,
+   and the project title morphs from the list into the case study heading. */
+::view-transition-old(root) {
+  animation: 180ms ease-out both vt-fade-out;
+}
+::view-transition-new(root) {
+  animation: 320ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both vt-fade-in;
+}
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-blur;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes vt-blur {
+  35% {
+    filter: blur(2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

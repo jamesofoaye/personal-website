@@ -7,6 +7,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PersonJsonLd } from "@/components/json-ld";
 import { PERSON, SITE_URL } from "@/lib/site";
+import { MobileCta } from "@/components/mobile-cta";
+import { META_DESCRIPTIONS } from "@/lib/meta";
 import "./globals.css";
 
 // Commissioner, the original site's typeface, self-hosted (variable 100–900).
@@ -23,11 +25,10 @@ export const metadata: Metadata = {
     default: `${PERSON.name} — ${PERSON.role}`,
     template: `%s — ${PERSON.shortName}`,
   },
-  description: PERSON.description,
+  description: META_DESCRIPTIONS.home,
   applicationName: PERSON.name,
   authors: [{ name: PERSON.name, url: SITE_URL }],
   creator: PERSON.name,
-  alternates: { canonical: "/", types: { "text/markdown": "/llms.txt" } },
   keywords: [
     "James Ofori Ayerakwa",
     "James Ofori",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   category: "technology",
   openGraph: {
     title: `${PERSON.name} — ${PERSON.role}`,
-    description: PERSON.description,
+    description: META_DESCRIPTIONS.home,
     type: "website",
     siteName: PERSON.name,
     locale: "en_GB",
@@ -55,19 +56,20 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${PERSON.name} — ${PERSON.role}`,
-    description: PERSON.description,
+    description: META_DESCRIPTIONS.home,
+    creator: "@jamesofoaye",
   },
-  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
   colorScheme: "light",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={commissioner.variable}>
+    <html lang="en-GB" className={commissioner.variable}>
       <body className="min-h-dvh">
         <a
           href="#main"
@@ -79,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />
+          <MobileCta />
         </Providers>
         <PersonJsonLd />
         <Analytics />

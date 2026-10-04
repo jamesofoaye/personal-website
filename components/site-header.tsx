@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { NAV } from "@/lib/site";
+import { NAV, PERSON } from "@/lib/site";
+import { EmailLink } from "@/components/email-link";
 import { trackEvent } from "@/lib/analytics";
 
 export function Wordmark() {
@@ -49,15 +50,42 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Escape closes the menu; lock scroll while it's open.
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // The open menu behaves like a modal: Escape closes it, scroll is locked,
+  // the page behind is inert, focus moves in and stays in, then returns.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenOn(null);
-    document.addEventListener("keydown", onKey);
+    const toggle = toggleRef.current;
+    const behind = [document.getElementById("main"), document.querySelector("footer")];
+    behind.forEach((el) => el && (el.inert = true));
     document.documentElement.style.overflow = "hidden";
+    const first = () => menuRef.current?.querySelector<HTMLElement>("a");
+    const t = setTimeout(() => first()?.focus(), 60);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenOn(null);
+        return;
+      }
+      if (e.key !== "Tab" || !menuRef.current || !toggle) return;
+      const items = [toggle, ...menuRef.current.querySelectorAll<HTMLElement>("a, button")];
+      const i = items.indexOf(document.activeElement as HTMLElement);
+      if (e.shiftKey && i <= 0) {
+        e.preventDefault();
+        items[items.length - 1]?.focus();
+      } else if (!e.shiftKey && i === items.length - 1) {
+        e.preventDefault();
+        items[0]?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
     return () => {
+      clearTimeout(t);
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      behind.forEach((el) => el && (el.inert = false));
+      toggle?.focus({ preventScroll: true });
     };
   }, [open]);
 
@@ -82,7 +110,7 @@ export function SiteHeader() {
                 data-track-item={item.label}
                 data-track-menu="desktop"
                 aria-current={isActive(item.href) ? "page" : undefined}
-                className="group relative px-5 py-2 text-[15px] text-ink transition-[font-weight] hover:font-semibold aria-[current=page]:font-semibold"
+                className="group relative px-5 py-2.5 text-[15px] text-ink transition-[font-weight] hover:font-semibold aria-[current=page]:font-semibold"
               >
                 {item.label}
                 <span
@@ -106,8 +134,9 @@ export function SiteHeader() {
               let&rsquo;s talk
             </Link>
             <button
+              ref={toggleRef}
               type="button"
-              className="grid size-10 place-items-center rounded-full border border-line md:hidden"
+              className="grid size-11 place-items-center rounded-full border border-line md:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -132,12 +161,16 @@ export function SiteHeader() {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={menuRef}
             id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 -z-10 flex flex-col justify-between bg-bg px-6 pt-28 pb-10 md:hidden"
+            className="fixed inset-0 -z-10 flex flex-col justify-between overflow-y-auto bg-bg px-6 pt-24 pb-[max(2.5rem,env(safe-area-inset-bottom))] md:hidden"
           >
             <nav aria-label="Mobile" className="flex flex-col gap-1">
               {[{ label: "Home", href: "/" }, ...NAV, { label: "Contact", href: "/#contact" }].map(
@@ -154,7 +187,7 @@ export function SiteHeader() {
                       data-track="nav_clicked"
                       data-track-item={item.label}
                       data-track-menu="mobile"
-                      className="flex items-baseline gap-4 border-b border-line py-3 font-display text-4xl text-ink"
+                      className="flex items-baseline gap-4 border-b border-line py-2.5 font-display text-[clamp(1.9rem,9vw,2.25rem)] text-ink"
                     >
                       <span className="text-xs font-semibold text-gold-ink">0{i + 1}</span>
                       {item.label}
@@ -163,7 +196,22 @@ export function SiteHeader() {
                 ),
               )}
             </nav>
-            <p className="text-xs text-faint">Abu Dhabi · 24.45°N 54.38°E</p>
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-2 gap-3">
+                <EmailLink className="inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-5 text-base text-white">
+                  Email me
+                </EmailLink>
+                <a
+                  href={PERSON.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink px-5 text-base text-ink"
+                >
+                  LinkedIn
+                </a>
+              </div>
+              <p className="text-xs text-faint">Abu Dhabi · 24.45°N 54.38°E</p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

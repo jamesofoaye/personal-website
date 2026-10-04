@@ -80,13 +80,16 @@ export function AnalyticsTracker() {
       // a section counts as seen once it crosses the middle of the screen
       { threshold: 0, rootMargin: "-45% 0px -45% 0px" },
     );
-    const observe = () => document.querySelectorAll("[data-section]").forEach((el) => io.observe(el));
+    const observe = () =>
+      document.querySelectorAll("[data-section]").forEach((el) => io.observe(el));
     observe();
     const t = setTimeout(observe, 1500);
 
     const marks = [25, 50, 75, 100];
     const hit = new Set<number>();
     const onScroll = () => {
+      // ignore the jump back to the top right after a client-side navigation
+      if (Date.now() - startRef.current < 700) return;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (max <= 0) return;
       const pct = Math.round((window.scrollY / max) * 100);
@@ -120,7 +123,8 @@ export function AnalyticsTracker() {
 
     const onCopy = () => {
       const sel = window.getSelection();
-      if (String(sel || "").trim()) trackEvent("text_copied", { section: sectionOf(sel?.anchorNode?.parentElement ?? null) });
+      if (String(sel || "").trim())
+        trackEvent("text_copied", { section: sectionOf(sel?.anchorNode?.parentElement ?? null) });
     };
     document.addEventListener("copy", onCopy);
 
@@ -139,13 +143,17 @@ export function AnalyticsTracker() {
 
 function sectionOf(el: Element | null): string {
   return (
+    (el?.closest("[data-location]") as HTMLElement | null)?.dataset.location ??
     (el?.closest("[data-section]") as HTMLElement | null)?.dataset.section ??
     (el?.closest("header") ? "header" : el?.closest("footer") ? "footer" : "page")
   );
 }
 
 function describe(el: HTMLElement): string {
-  const label = el.getAttribute("aria-label") || el.textContent?.trim().slice(0, 40) || el.tagName.toLowerCase();
+  const label =
+    el.getAttribute("aria-label") ||
+    el.textContent?.trim().slice(0, 40) ||
+    el.tagName.toLowerCase();
   return `${el.tagName.toLowerCase()}:${label}`;
 }
 

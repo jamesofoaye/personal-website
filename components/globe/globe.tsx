@@ -7,8 +7,13 @@ import { trackEvent } from "@/lib/analytics";
 /**
  * A dotted Earth with a live arc from Accra to Abu Dhabi.
  * - ~14k land dots (precomputed by scripts/build-globe-points.mjs)
+ * - the dots fly in and assemble the continents on first load
  * - fresnel atmosphere, travelling light along the arc, pulsing city pins
- * - drag to spin with inertia; gentle sway otherwise
+ * - a slow orbit ring of gold particles for depth
+ * - tap or click the globe to send a ripple through the land; the cities
+ *   send one out on their own every few seconds
+ * - drag to spin with inertia; the globe turns toward Abu Dhabi as you scroll
+ *   and leans toward the cursor on desktop
  * - pauses when off-screen or the tab is hidden; static under reduced motion
  */
 
@@ -50,13 +55,13 @@ export default function Globe({ className }: { className?: string }) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let disposed = false;
 
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
     const renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: true,
+      antialias: !coarse, // high-DPR phones don't need MSAA on round dots
       alpha: true,
       powerPreference: "high-performance",
     });
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, coarse ? 1.5 : 2));
 
     // No GPU (software rendering): draw a still frame instead of animating, so
@@ -64,7 +69,10 @@ export default function Globe({ className }: { className?: string }) {
     const gl = renderer.getContext();
     const dbg = gl.getExtension("WEBGL_debug_renderer_info");
     const gpu = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : "";
-    const softwareGL = /swiftshader|llvmpipe|software|basic render/i.test(gpu);
+    // ?forcegl animates anyway (for testing in headless browsers)
+    const softwareGL =
+      /swiftshader|llvmpipe|software|basic render/i.test(gpu) &&
+      !new URLSearchParams(window.location.search).has("forcegl");
     const still = reduceMotion || softwareGL;
     renderer.setClearColor(0x000000, 0);
 
@@ -86,6 +94,9 @@ export default function Globe({ className }: { className?: string }) {
       uGold: { value: cssColor("--globe-glow", "#e6af2e") },
       uPixelRatio: { value: renderer.getPixelRatio() },
       uSize: { value: 1 },
+      uIntro: { value: 0 },
+      uRipple: { value: new THREE.Vector3(0, 0, 1) },
+      uRippleT: { value: -10 },
     };
 
     // Occluder: writes depth only, so dots on the far side are hidden.
@@ -181,6 +192,51 @@ export default function Globe({ className }: { className?: string }) {
     );
     spin.add(arc);
 
+    // Orbit ring: a tilted band of gold specks circling the globe
+    const ringCount = coarse ? 420 : 900;
+    const ringPos = new Float32Array(ringCount * 3);
+    const ringRnd = new Float32Array(ringCount);
+    for (let i = 0; i < ringCount; i++) {
+      const ang = Math.random() * Math.PI * 2;
+      const r = 1.42 + (Math.random() - 0.5) * 0.12 + Math.pow(Math.random(), 4) * 0.25;
+      ringPos.set([Math.cos(ang) * r, (Math.random() - 0.5) * 0.025, Math.sin(ang) * r], i * 3);
+      ringRnd[i] = Math.random();
+    }
+    const ringGeo = new THREE.BufferGeometry();
+    ringGeo.setAttribute("position", new THREE.BufferAttribute(ringPos, 3));
+    ringGeo.setAttribute("aRnd", new THREE.BufferAttribute(ringRnd, 1));
+    const orbit = new THREE.Points(
+      ringGeo,
+      new THREE.ShaderMaterial({
+        uniforms,
+        transparent: true,
+        depthWrite: false,
+        vertexShader: /* glsl */ `
+          uniform float uPixelRatio; uniform float uSize; uniform float uTime; uniform float uIntro;
+          attribute float aRnd;
+          varying float vA;
+          void main(){
+            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+            // fade the half of the ring that sits behind the globe
+            float front = smoothstep(-0.6, 0.4, (modelMatrix * vec4(position,1.0)).z);
+            vA = (0.25 + 0.75 * front) * (0.4 + 0.6 * fract(aRnd * 7.0 + uTime * 0.05)) * clamp(uIntro * 1.5 - 0.5, 0.0, 1.0);
+            gl_PointSize = (1.2 + aRnd * 1.6) * uPixelRatio * uSize;
+            gl_Position = projectionMatrix * mv;
+          }`,
+        fragmentShader: /* glsl */ `
+          uniform vec3 uGold; varying float vA;
+          void main(){
+            vec2 c = gl_PointCoord - 0.5;
+            if (dot(c,c) > 0.25) discard;
+            gl_FragColor = vec4(uGold, vA * 0.55);
+          }`,
+      }),
+    );
+    const orbitPivot = new THREE.Group();
+    orbitPivot.rotation.set(-0.42, 0, 0.32);
+    orbitPivot.add(orbit);
+    scene.add(orbitPivot);
+
     // Land dots (loaded async so first paint isn't blocked)
     let points: THREE.Points | null = null;
     fetch("/globe/land.bin")
@@ -192,6 +248,7 @@ export default function Globe({ className }: { className?: string }) {
         const pos = new Float32Array(n * 3);
         const rnd = new Float32Array(n);
         const dist = new Float32Array(n);
+        const startPos = new Float32Array(n * 3);
         const accra = toVec3(CITIES.accra.lat, CITIES.accra.lon);
         const ad = toVec3(CITIES.abuDhabi.lat, CITIES.abuDhabi.lon);
         const v = new THREE.Vector3();
@@ -199,12 +256,23 @@ export default function Globe({ className }: { className?: string }) {
           v.copy(toVec3(data[i * 2]! / 100, data[i * 2 + 1]! / 100));
           pos.set([v.x, v.y, v.z], i * 3);
           rnd[i] = Math.random();
+          // fly in from a scattered shell, mostly from the camera side
+          const s = 1.8 + Math.random() * 2.2;
+          startPos.set(
+            [
+              v.x * s + (Math.random() - 0.5) * 1.6,
+              v.y * s + (Math.random() - 0.5) * 1.6,
+              v.z * s + Math.random() * 1.2,
+            ],
+            i * 3,
+          );
           dist[i] = Math.min(v.distanceTo(accra), v.distanceTo(ad));
         }
         const geo = new THREE.BufferGeometry();
         geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
         geo.setAttribute("aRnd", new THREE.BufferAttribute(rnd, 1));
         geo.setAttribute("aDist", new THREE.BufferAttribute(dist, 1));
+        geo.setAttribute("aStart", new THREE.BufferAttribute(startPos, 3));
         points = new THREE.Points(
           geo,
           new THREE.ShaderMaterial({
@@ -213,29 +281,42 @@ export default function Globe({ className }: { className?: string }) {
             depthWrite: false,
             vertexShader: /* glsl */ `
               uniform float uTime; uniform float uPixelRatio; uniform float uSize;
-              attribute float aRnd; attribute float aDist;
-              varying float vAlpha; varying float vNear;
+              uniform float uIntro; uniform vec3 uRipple; uniform float uRippleT;
+              attribute float aRnd; attribute float aDist; attribute vec3 aStart;
+              varying float vAlpha; varying float vNear; varying float vWave;
               void main(){
-                vec4 mv = modelViewMatrix * vec4(position, 1.0);
+                // assemble: each dot lands at its own moment
+                float k = clamp(uIntro * 1.7 - aRnd * 0.7, 0.0, 1.0);
+                k = 1.0 - pow(1.0 - k, 3.0);
+                // ripple: a ring of light that travels across the surface
+                float age = uTime - uRippleT;
+                float d = distance(position, uRipple);
+                float front = age * 0.85;
+                float wave = smoothstep(0.16, 0.0, abs(d - front)) * smoothstep(2.4, 0.2, age);
+                vWave = wave;
+                vec3 p = mix(aStart, position * (1.0 + wave * 0.045), k);
+                vec4 mv = modelViewMatrix * vec4(p, 1.0);
                 vec3 n = normalize(normalMatrix * position);
                 float facing = clamp(dot(n, vec3(0.0,0.0,1.0)), 0.0, 1.0);
                 float tw = 0.75 + 0.25 * sin(uTime * 1.5 + aRnd * 40.0);
                 vNear = smoothstep(0.35, 0.0, aDist);
-                vAlpha = (0.18 + 0.82 * pow(facing, 1.4)) * tw;
-                gl_PointSize = (2.1 + vNear * 1.6) * uPixelRatio * uSize * (0.55 + 0.45 * facing);
+                vAlpha = mix(0.35, (0.18 + 0.82 * pow(facing, 1.4)) * tw, k) * k;
+                gl_PointSize = (2.1 + vNear * 1.6 + wave * 1.8) * uPixelRatio * uSize * (0.55 + 0.45 * facing);
                 gl_Position = projectionMatrix * mv;
               }`,
             fragmentShader: /* glsl */ `
               uniform vec3 uDot; uniform vec3 uGold;
-              varying float vAlpha; varying float vNear;
+              varying float vAlpha; varying float vNear; varying float vWave;
               void main(){
                 vec2 c = gl_PointCoord - 0.5;
                 if (dot(c,c) > 0.25) discard;
-                gl_FragColor = vec4(mix(uDot, uGold, vNear * 0.85), vAlpha * (0.55 + 0.45 * vNear));
+                float g = clamp(vNear * 0.85 + vWave, 0.0, 1.0);
+                gl_FragColor = vec4(mix(uDot, uGold, g), vAlpha * (0.55 + 0.45 * max(vNear, vWave)));
               }`,
           }),
         );
         spin.add(points);
+        introStart = performance.now();
         wrap.dataset.ready = "true";
         if (still) {
           running = false;
@@ -276,8 +357,18 @@ export default function Globe({ className }: { className?: string }) {
     let userOffset = 0;
     let userTilt = 0;
     let draggedOnce = false;
+    let downX = 0;
+    let downY = 0;
+    const raycaster = new THREE.Raycaster();
+    const ndc = new THREE.Vector2();
+    const ripple = (local: THREE.Vector3, at: number) => {
+      uniforms.uRipple.value.copy(local);
+      uniforms.uRippleT.value = at;
+    };
     const onDown = (e: PointerEvent) => {
       dragging = true;
+      downX = e.clientX;
+      downY = e.clientY;
       if (!draggedOnce) {
         draggedOnce = true;
         trackEvent("globe_dragged", { input: e.pointerType });
@@ -296,10 +387,47 @@ export default function Globe({ className }: { className?: string }) {
       velY = dx * 0.005;
       velX = dy * 0.003;
     };
-    const onUp = () => {
+    const onUp = (e: PointerEvent) => {
       dragging = false;
       wrap.style.cursor = "";
+      // a tap (not a drag) sends a ripple out from where it landed
+      if (e.type === "pointerup" && Math.hypot(e.clientX - downX, e.clientY - downY) < 8) {
+        const r = canvas.getBoundingClientRect();
+        ndc.set(
+          ((e.clientX - r.left) / r.width) * 2 - 1,
+          -((e.clientY - r.top) / r.height) * 2 + 1,
+        );
+        raycaster.setFromCamera(ndc, camera);
+        const hit = raycaster.intersectObject(occluder)[0];
+        if (hit) {
+          ripple(spin.worldToLocal(hit.point.clone()).normalize(), uniforms.uTime.value);
+          nextAuto = uniforms.uTime.value + 7;
+          start();
+        }
+      }
     };
+
+    // Desktop: lean a little toward the cursor
+    let leanX = 0;
+    let leanY = 0;
+    let leanTX = 0;
+    let leanTY = 0;
+    const onWindowMove = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      leanTY = (e.clientX / window.innerWidth - 0.5) * 0.35;
+      leanTX = (e.clientY / window.innerHeight - 0.5) * 0.18;
+    };
+    window.addEventListener("pointermove", onWindowMove, { passive: true });
+
+    // Scroll: turn toward Abu Dhabi while the hero leaves the screen
+    let scrollTurn = 0;
+    const onScroll = () => {
+      const h = host.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -h.top / Math.max(1, h.height)));
+      scrollTurn = p;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     canvas.addEventListener("pointerdown", onDown);
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerup", onUp);
@@ -316,6 +444,10 @@ export default function Globe({ className }: { className?: string }) {
     document.addEventListener("visibilitychange", onVis);
 
     const t0 = performance.now();
+    let introStart = 0;
+    let nextAuto = 3.2;
+    let autoCity = 0;
+    const cityLocal = [a.clone(), b.clone()];
     const tmp = new THREE.Vector3();
     const camDir = new THREE.Vector3(0, 0, 1);
     let raf = 0;
@@ -331,8 +463,19 @@ export default function Globe({ className }: { className?: string }) {
       last = now;
       const t = (performance.now() - t0) / 1000;
       uniforms.uTime.value = still ? 1.2 : t;
+      // linear here; each dot eases itself in the shader
+      uniforms.uIntro.value = still ? 1 : introStart ? Math.min(1, (now - introStart) / 2400) : 0;
 
       if (!still) {
+        // the cities pulse a ripple across the land every few seconds
+        if (introStart && t > nextAuto) {
+          ripple(cityLocal[autoCity % 2]!, t);
+          autoCity++;
+          nextAuto = t + 6.5;
+        }
+        leanX += (leanTX - leanX) * 0.04;
+        leanY += (leanTY - leanY) * 0.04;
+        orbit.rotation.y = t * 0.06;
         if (!dragging) {
           velY *= 0.94;
           velX *= 0.9;
@@ -343,8 +486,9 @@ export default function Globe({ className }: { className?: string }) {
         userOffset += velY;
         userTilt = THREE.MathUtils.clamp(userTilt + velX, -0.5, 0.5);
         const sway = Math.sin(t * 0.18) * 0.32;
-        spin.rotation.y = -CENTER_LON * DEG + sway + userOffset;
-        tilt.rotation.x = CENTER_LAT * DEG + userTilt;
+        spin.rotation.y = -CENTER_LON * DEG + sway + userOffset + leanY - scrollTurn * 0.9;
+        tilt.rotation.x = CENTER_LAT * DEG + userTilt + leanX + scrollTurn * 0.15;
+        orbitPivot.rotation.y = leanY * 0.6;
         pins.forEach(({ ring }) => {
           const p = (t * 0.6 + (ring.userData.offset as number)) % 1;
           ring.scale.setScalar(1 + p * 2.2);
@@ -393,6 +537,8 @@ export default function Globe({ className }: { className?: string }) {
       canvas.removeEventListener("pointermove", onMove);
       canvas.removeEventListener("pointerup", onUp);
       canvas.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("pointermove", onWindowMove);
+      window.removeEventListener("scroll", onScroll);
       scene.traverse((o) => {
         if (o instanceof THREE.Mesh || o instanceof THREE.Points) {
           o.geometry.dispose();
@@ -422,7 +568,7 @@ export default function Globe({ className }: { className?: string }) {
           className="pointer-events-none absolute top-0 left-0 opacity-0 will-change-transform"
           aria-hidden
         >
-          <span className="ml-3 -translate-y-1/2 inline-block rounded-full border border-line bg-bg/70 px-2.5 py-1 font-mono text-[10px] tracking-wider whitespace-nowrap text-ink uppercase backdrop-blur-md">
+          <span className="ml-3 -translate-y-1/2 inline-block rounded-full border border-line bg-bg/70 px-2.5 py-1 font-mono text-[11px] tracking-wider whitespace-nowrap text-ink uppercase backdrop-blur-md">
             {CITIES[key].label}
           </span>
         </div>

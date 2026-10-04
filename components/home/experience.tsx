@@ -1,3 +1,4 @@
+import { TrackHorizontalScroll } from "@/components/track";
 import Image from "next/image";
 import { EXPERIENCE, SKILLS, ARCHIVE } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
@@ -11,9 +12,9 @@ export function Experience() {
       className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36"
     >
       <SectionHeading
-        eyebrow="Working Experience"
+        eyebrow="Experience"
         title="I have been building software professionally since 2020."
-        intro="I taught myself to code in 2019 and started working professionally the year after. I do my best work in small teams, close to product and design, where I can take an idea all the way to the app stores."
+        intro="I taught myself to code in 2019 and started working professionally the year after. These are the places I have worked since then, alongside my own products."
       />
       <ol className="mt-16 border-t border-line sm:mt-20">
         {EXPERIENCE.map((e, i) => (
@@ -57,9 +58,9 @@ export function Skills() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pt-20 sm:px-8">
-        <h2 id="skills-title" className="mb-12 flex justify-end">
+        <h2 id="skills-title" className="mb-12 flex">
           <span className="label-bar text-[15px] sm:text-lg">
-            Technologies I Use
+            Technologies I use
             <span
               aria-hidden
               className="size-[15px] rounded-full"
@@ -94,54 +95,62 @@ export function Skills() {
 
 export function Archive() {
   return (
-    <section data-section="other_work" className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+    <section data-section="other_work" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
       <Reveal>
         <h2 className="text-sm font-bold tracking-wide text-ink uppercase">
           Other things I have built
         </h2>
       </Reveal>
-      <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-        {ARCHIVE.map((a, i) => (
-          <li key={a.name} className={i === 0 ? "sm:col-span-2" : undefined}>
-            <Reveal delay={(i % 2) * 0.06} className="h-full">
-              <a
-                href={a.url}
-                target="_blank"
-                rel="noopener"
-                className={`group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgb(14_16_23/0.35)] ${i === 0 ? "sm:flex-row" : ""}`}
-              >
-                <div
-                  className={`overflow-hidden border-b border-line bg-surface ${i === 0 ? "sm:w-1/2 sm:shrink-0 sm:border-e sm:border-b-0" : ""}`}
+      <p className="mt-3 text-xs text-faint sm:hidden">
+        Swipe to see all {ARCHIVE.length} <span aria-hidden>→</span>
+      </p>
+      <TrackHorizontalScroll event="archive_swiped" props={{ section: "other_work" }}>
+        <ul className="-mx-5 mt-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:mt-8 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0">
+          {ARCHIVE.map((a, i) => (
+            <li
+              key={a.name}
+              className={`w-[80vw] max-w-sm shrink-0 snap-start sm:w-auto sm:max-w-none ${i === 0 ? "sm:col-span-2" : ""}`}
+            >
+              <Reveal delay={(i % 2) * 0.06} className="h-full">
+                <a
+                  href={a.url}
+                  target="_blank"
+                  rel="noopener"
+                  className={`group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgb(14_16_23/0.35)] ${i === 0 ? "sm:flex-row" : ""}`}
                 >
-                  <Image
-                    src={a.image}
-                    alt={`The ${a.name} website`}
-                    width={800}
-                    height={500}
-                    sizes="(min-width: 640px) 600px, 100vw"
-                    className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div
-                  className={`flex flex-1 flex-col p-6 ${i === 0 ? "sm:justify-center sm:p-10" : ""}`}
-                >
-                  <p className="flex items-center justify-between font-display text-2xl text-ink">
-                    {a.name}
-                    <span
-                      className="font-sans text-sm text-faint transition-colors group-hover:text-ink"
-                      aria-hidden
-                    >
-                      ↗
-                    </span>
-                  </p>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{a.note}</p>
-                  <p className="mt-auto pt-4 text-xs font-medium text-faint">{a.stack}</p>
-                </div>
-              </a>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+                  <div
+                    className={`overflow-hidden border-b border-line bg-surface ${i === 0 ? "sm:w-1/2 sm:shrink-0 sm:border-e sm:border-b-0" : ""}`}
+                  >
+                    <Image
+                      src={a.image}
+                      alt={`The ${a.name} website`}
+                      width={800}
+                      height={500}
+                      sizes="(min-width: 640px) 600px, 100vw"
+                      className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div
+                    className={`flex flex-1 flex-col p-6 ${i === 0 ? "sm:justify-center sm:p-10" : ""}`}
+                  >
+                    <p className="flex items-center justify-between font-display text-2xl text-ink">
+                      {a.name}
+                      <span
+                        className="font-sans text-sm text-faint transition-colors group-hover:text-ink"
+                        aria-hidden
+                      >
+                        ↗
+                      </span>
+                    </p>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted">{a.note}</p>
+                    <p className="mt-auto pt-4 text-xs font-medium text-faint">{a.stack}</p>
+                  </div>
+                </a>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </TrackHorizontalScroll>
     </section>
   );
 }

@@ -19,6 +19,7 @@ export const PERSON = {
   links: {
     linkedin: "https://www.linkedin.com/in/jamesofoaye",
     github: "https://github.com/jamesofoaye",
+    x: "https://x.com/jamesofoaye",
   },
 } as const;
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { GlobeLoader } from "@/components/globe/globe-loader";
 import { CssWords } from "@/components/reveal";
 import { HERO_STATS } from "@/lib/content";
@@ -11,16 +11,17 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const globeScale = useTransform(scrollYProgress, [0, 1], [1, 0.82]);
-  const globeY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const globeScale = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [1, 0.82]);
+  const globeY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "18%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.8], reduce ? [1, 1] : [1, 0]);
 
   return (
     <section
       ref={ref}
       data-section="hero"
-      className="relative isolate overflow-hidden pt-28 sm:pt-32"
+      className="relative isolate overflow-hidden pt-20 sm:pt-32"
     >
       {/* soft light behind the globe */}
       <div
@@ -29,8 +30,10 @@ export function Hero() {
         style={{ background: "radial-gradient(circle, rgb(230 175 46 / 0.14), transparent 60%)" }}
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-4 px-5 sm:px-8 lg:min-h-[calc(100dvh-8rem)] lg:grid-cols-[1.05fr_1fr]">
-        <div className="relative z-10 py-6 lg:py-0">
+      {/* Mobile order: name → globe → story → buttons, so the globe is on the first screen.
+          Desktop: text on the left (two stacked blocks), globe on the right. */}
+      <div className="mx-auto grid max-w-7xl px-5 sm:px-8 lg:min-h-[calc(100dvh-8rem)] lg:grid-cols-[1.05fr_1fr] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-4">
+        <div className="relative z-10 order-1 pt-6 lg:order-none lg:col-start-1 lg:row-start-2 lg:pt-0">
           <div className="rise w-max" style={{ animationDelay: "0s" }}>
             <p className="text-lg font-semibold text-ink">Hello, I&rsquo;m</p>
             <div className="mt-1 h-1 w-[100px] bg-ink" aria-hidden />
@@ -49,9 +52,11 @@ export function Hero() {
             </span>{" "}
             <CssWords text="inside them." delay={0.42} />
           </p>
+        </div>
 
+        <div className="relative z-10 order-3 lg:order-none lg:col-start-1 lg:row-start-3">
           <p
-            className="rise mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted"
+            className="rise mt-2 max-w-xl text-lg leading-relaxed text-pretty text-muted lg:mt-6"
             style={{ animationDelay: "0.3s" }}
           >
             I&rsquo;m a{" "}
@@ -63,7 +68,7 @@ export function Hero() {
             >
               Verinvo
             </Link>
-            , the UAE&rsquo;s Ministry of Finance-accredited e-invoicing platform. Outside work, I
+            , a Ministry of Finance-accredited e-invoicing platform in the UAE. Outside work, I
             build my own products for people in the UAE and Ghana.
           </p>
 
@@ -92,7 +97,7 @@ export function Hero() {
 
         <motion.div
           style={{ scale: globeScale, y: globeY, opacity: fade }}
-          className="relative -mx-5 aspect-square sm:mx-0 lg:-mr-24 lg:aspect-auto lg:h-[min(84vh,860px)]"
+          className="relative order-2 -mx-5 -my-4 h-[clamp(270px,44svh,420px)] sm:mx-0 sm:h-auto sm:aspect-square lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:my-0 lg:-mr-24 lg:aspect-auto lg:h-[min(84vh,860px)] lg:self-center"
         >
           <motion.div
             className="absolute inset-0"
@@ -102,9 +107,10 @@ export function Hero() {
           >
             <GlobeLoader className="absolute inset-0" />
           </motion.div>
-          <p className="pointer-events-none absolute bottom-3 left-1/2 w-[92%] -translate-x-1/2 text-center text-[10px] font-medium tracking-[0.12em] text-faint uppercase sm:w-auto sm:text-[11px] sm:tracking-[0.14em] sm:whitespace-nowrap lg:bottom-10">
+          <p className="pointer-events-none absolute bottom-3 left-1/2 w-[92%] -translate-x-1/2 text-center text-[11px] font-medium tracking-[0.12em] text-faint uppercase sm:w-auto sm:text-xs sm:tracking-[0.14em] sm:whitespace-nowrap lg:bottom-10">
             5.60°N 0.19°W <span className="text-gold">⟶</span> 24.45°N 54.38°E{" "}
-            <span className="hidden sm:inline">· drag to spin</span>
+            <span className="hidden sm:inline">· drag to spin, click for a ripple</span>
+            <span className="sm:hidden">· tap the globe</span>
           </p>
         </motion.div>
       </div>

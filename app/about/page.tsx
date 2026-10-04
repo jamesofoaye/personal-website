@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
 import { Reveal } from "@/components/reveal";
@@ -6,12 +7,13 @@ import { JsonLd } from "@/components/json-ld";
 import { FAQ } from "@/lib/faq";
 import { faqGraph, profilePageGraph } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  key: "about",
   title: "About",
-  description:
-    "James Ofori Ayerakwa is a self-taught software engineer from Ghana who lives in Abu Dhabi. This page covers his background, how he works and answers to common questions.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+  socialTitle: "About James Ofori Ayerakwa",
+  type: "profile",
+});
 
 const CHAPTERS = [
   {
@@ -97,7 +99,7 @@ export default function AboutPage() {
             delay={i * 0.06}
             className="rounded-xl border border-line bg-surface p-7"
           >
-            <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">{x.k}</h2>
+            <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">{x.k}</h2>
             <p className="mt-4 leading-relaxed text-ink">{x.v}</p>
           </Reveal>
         ))}

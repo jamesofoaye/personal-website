@@ -198,7 +198,7 @@ export function VenturePoster({
       <div
         className={`relative flex h-full flex-col justify-between ${size === "hero" ? "p-8 sm:p-12" : "p-5 sm:p-6"}`}
       >
-        <p className="font-mono text-[10px] tracking-[0.18em] text-white/70 uppercase">
+        <p className="font-mono text-[11px] tracking-[0.18em] text-white/70 uppercase">
           {venture.kind}
         </p>
         <p

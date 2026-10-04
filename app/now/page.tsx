@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import { PageIntro } from "@/components/page-intro";
 import Content from "./content.mdx";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  key: "now",
   title: "Now",
-  description:
-    "What James Ofori Ayerakwa is working on this month across Hisab, DrivingInstructor.ae, Dawurobo and Verinvo.",
-  alternates: { canonical: "/now" },
-};
+  path: "/now",
+  socialTitle: "What James Ofori is working on now",
+});
 
 // Update this date whenever content.mdx changes.
 const UPDATED = "October 2026";

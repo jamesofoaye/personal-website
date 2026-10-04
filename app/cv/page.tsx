@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import { EXPERIENCE, SKILLS, VENTURES } from "@/lib/content";
 import { PERSON } from "@/lib/site";
 import { EmailLink } from "@/components/email-link";
 import { PrintButton } from "./print-button";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  key: "cv",
   title: "CV",
-  description:
-    "The CV of James Ofori Ayerakwa, a Lead Frontend and Applied AI Engineer in Abu Dhabi. It lists his experience, the products he has built and his skills.",
-  alternates: { canonical: "/cv" },
-};
+  path: "/cv",
+  socialTitle: "CV — James Ofori Ayerakwa",
+  type: "profile",
+});
 
 const STRENGTHS = [
   [
@@ -18,10 +20,10 @@ const STRENGTHS = [
   ],
   [
     "Regulated, data-heavy products",
-    "I have built national e-invoicing, payments, logistics, marketplaces and credit-report analysis, all within real compliance rules.",
+    "I have built e-invoicing that meets national rules, as well as payments, logistics and marketplaces.",
   ],
   [
-    "Zero-to-one delivery",
+    "Taking products from idea to launch",
     "I take products from an idea to launch across mobile, web and API, and I help small teams ship more by sharing AI-assisted workflows.",
   ],
   [
@@ -30,7 +32,7 @@ const STRENGTHS = [
   ],
   [
     "Frontend architecture",
-    "I build shared permission and design-system packages, and interfaces that work right to left in English, Arabic, Hindi and Urdu.",
+    "I build shared permission and design-system packages, and interfaces in English, Arabic, Hindi and Urdu, including right-to-left layouts.",
   ],
 ] as const;
 
@@ -40,7 +42,7 @@ export default function CvPage() {
       <header className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
         <div>
           <h1 className="font-display text-5xl text-ink sm:text-6xl">{PERSON.name}</h1>
-          <p className="mt-2 text-lg text-muted">{PERSON.role} · Web, Mobile &amp; AI Products</p>
+          <p className="mt-2 text-lg text-muted">{PERSON.role}</p>
           <p className="mt-3 text-sm text-muted">
             {PERSON.location} ·{" "}
             <EmailLink className="underline decoration-gold underline-offset-4" /> ·{" "}
@@ -56,21 +58,20 @@ export default function CvPage() {
       </header>
 
       <section className="py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Profile</h2>
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">Profile</h2>
         <p className="mt-4 text-lg leading-relaxed text-ink">
-          Frontend and applied AI engineer with 6+ years of professional experience (coding since
-          2019) building production web and mobile products in TypeScript, React, Next.js and React
-          Native. I lead frontend on Verinvo, the UAE Ministry of Finance-accredited e-invoicing
-          platform at Oxinus Holdings (IHC Group), and built its AI agent, Ask Verinvo, with our
-          product and backend colleagues. Outside work I co-founded Hisab, started
-          DrivingInstructor.ae, and have led engineering at Dawurobo in Ghana since 2021.
+          I am a frontend and applied AI engineer. I have been coding since 2019 and building
+          production web and mobile products professionally since 2020, in TypeScript, React,
+          Next.js and React Native. I lead the frontend of Verinvo, a Ministry of Finance-accredited
+          e-invoicing platform in the UAE, at Oxinus Holdings (IHC Group), and helped build its AI
+          agent, Ask Verinvo, with colleagues across product, MCP tooling and backend. Outside work
+          I co-founded Hisab, started DrivingInstructor.ae, and have led engineering at Dawurobo in
+          Ghana since 2021.
         </p>
       </section>
 
       <section className="border-t border-line py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
-          Core strengths
-        </h2>
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">Core strengths</h2>
         <dl className="mt-4 grid gap-4">
           {STRENGTHS.map(([k, v]) => (
             <div key={k} className="grid gap-1 sm:grid-cols-[14rem_1fr] sm:gap-6">
@@ -82,7 +83,7 @@ export default function CvPage() {
       </section>
 
       <section className="border-t border-line py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Ventures</h2>
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">Ventures</h2>
         <div className="mt-6 grid gap-10">
           {VENTURES.filter((v) => v.slug !== "oja-studios" && v.slug !== "personal-vpn").map(
             (v) => (
@@ -108,7 +109,7 @@ export default function CvPage() {
       </section>
 
       <section className="border-t border-line py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Experience</h2>
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">Experience</h2>
         <ol className="mt-4 grid gap-4">
           {EXPERIENCE.map((e) => (
             <li key={`${e.org}-${e.role}`} className="grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6">
@@ -128,7 +129,7 @@ export default function CvPage() {
       </section>
 
       <section className="border-t border-line py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Skills</h2>
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">Skills</h2>
         <dl className="mt-4 grid gap-3">
           {SKILLS.map((g) => (
             <div key={g.group} className="grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6">
@@ -140,7 +141,7 @@ export default function CvPage() {
       </section>
 
       <section className="border-t border-line py-10">
-        <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+        <h2 className="font-mono text-xs tracking-[0.16em] text-muted uppercase">
           Education &amp; other
         </h2>
         <ul className="mt-4 grid gap-2 text-muted">

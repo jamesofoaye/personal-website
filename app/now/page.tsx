@@ -4,7 +4,8 @@ import Content from "./content.mdx";
 
 export const metadata: Metadata = {
   title: "Now",
-  description: "What James Ofori is focused on this month.",
+  description:
+    "What James Ofori Ayerakwa is working on this month across Hisab, DrivingInstructor.ae, Dawurobo and Verinvo.",
   alternates: { canonical: "/now" },
 };
 

@@ -127,7 +127,7 @@ export const VENTURES: Venture[] = [
     period: "2026 — now",
     place: "UAE · iOS & Android",
     kind: "Financial wellness app",
-    tagline: "Hisab helps people in the UAE get out of debt, one clear step at a time.",
+    tagline: "Hisab is a financial wellness app that helps people in the UAE pay off their debt.",
     summary:
       "Hisab is a financial wellness app for people living in the UAE. It puts all of someone's debts in one place, shows them their debt-free date and tells them which payment to make first. You don't need an account to use it, and your data stays on your phone.",
     url: "https://gethisab.com",

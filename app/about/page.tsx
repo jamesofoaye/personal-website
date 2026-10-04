@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
 import { Reveal } from "@/components/reveal";
+import { JsonLd } from "@/components/json-ld";
+import { FAQ } from "@/lib/faq";
+import { faqGraph, profilePageGraph } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Self-taught engineer from Ghana, building in Abu Dhabi: the path from Andela to leading frontend and applied AI on a national platform.",
+    "James Ofori Ayerakwa is a self-taught software engineer from Ghana who lives in Abu Dhabi. This page covers his background, how he works and answers to common questions.",
   alternates: { canonical: "/about" },
 };
 
@@ -95,6 +98,22 @@ export default function AboutPage() {
             <p className="mt-4 leading-relaxed text-ink">{x.v}</p>
           </Reveal>
         ))}
+      </section>
+
+      <section aria-labelledby="faq-title" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+        <JsonLd data={faqGraph()} />
+        <JsonLd data={profilePageGraph("/about", "About James Ofori Ayerakwa")} />
+        <h2 id="faq-title" className="font-display text-4xl text-ink sm:text-5xl">
+          Questions people ask me
+        </h2>
+        <dl className="mt-10 divide-y divide-line border-y border-line">
+          {FAQ.map((f) => (
+            <div key={f.q} className="grid gap-2 py-6 md:grid-cols-[1fr_2fr] md:gap-12">
+              <dt className="text-lg font-semibold text-ink">{f.q}</dt>
+              <dd className="leading-relaxed text-muted">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pb-28 sm:px-8">

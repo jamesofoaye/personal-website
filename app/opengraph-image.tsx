@@ -1,10 +1,11 @@
 import { ImageResponse } from "next/og";
+import { ogFonts } from "@/lib/og-fonts";
 
 export const alt = "James Ofori Ayerakwa — Lead Frontend & Applied AI Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OgImage() {
+export default async function OgImage() {
   // dotted arc motif drawn with plain divs — no external fonts or images needed
   const dots = Array.from({ length: 26 }, (_, i) => {
     const t = i / 25;
@@ -21,6 +22,8 @@ export default function OgImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         background: "#ffffff",
+        fontFamily: "Commissioner",
+        fontWeight: 500,
         color: "#0e1017",
         padding: 72,
         position: "relative",
@@ -82,9 +85,9 @@ export default function OgImage() {
         </div>
       </div>
       <div style={{ display: "flex", fontSize: 22, color: "#676a74" }}>
-        Accra → Abu Dhabi · Verinvo · Hisab · DrivingInstructor.ae · Dawurobo
+        Accra and Abu Dhabi · Verinvo · Hisab · DrivingInstructor.ae · Dawurobo
       </div>
     </div>,
-    size,
+    { ...size, fonts: await ogFonts() },
   );
 }

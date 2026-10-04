@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { VENTURES } from "@/lib/content";
 import { BrowserFrame, PhoneFrame, VentureCover } from "@/components/device";
 import { Reveal } from "@/components/reveal";
+import { JsonLd } from "@/components/json-ld";
+import { caseStudyGraph } from "@/lib/structured-data";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,7 +23,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${v.name} — ${v.kind}`,
     description: v.summary,
     alternates: { canonical: `/work/${v.slug}` },
-    openGraph: { title: `${v.name} — James Ofori`, description: v.summary, url: `/work/${v.slug}` },
+    openGraph: {
+      type: "article",
+      title: `${v.name} — James Ofori`,
+      description: v.summary,
+      url: `/work/${v.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${v.name} — James Ofori`,
+      description: v.summary,
+    },
+    keywords: [v.name, v.kind, ...v.stack, "James Ofori Ayerakwa"],
   };
 }
 
@@ -34,6 +47,7 @@ export default async function CaseStudy({ params }: Props) {
 
   return (
     <article className="pt-28 sm:pt-36">
+      <JsonLd data={caseStudyGraph(v)} />
       <header className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <Link
@@ -191,7 +205,7 @@ export default async function CaseStudy({ params }: Props) {
               <ul className="-mx-5 mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-6 sm:mx-0 sm:px-0 [scrollbar-width:thin]">
                 {v.shots.map((shot) => (
                   <li key={shot.src} className="w-[62%] shrink-0 snap-center sm:w-[240px]">
-                    <PhoneFrame shot={shot} sizes="240px" />
+                    <PhoneFrame shot={{ ...shot, alt: "" }} sizes="240px" />
                     <p className="mt-4 text-sm text-muted">{shot.alt}</p>
                   </li>
                 ))}
@@ -200,7 +214,7 @@ export default async function CaseStudy({ params }: Props) {
               <ul className="mt-10 grid gap-10">
                 {v.shots.map((shot) => (
                   <li key={shot.src}>
-                    <BrowserFrame shot={shot} url={`${v.name} · API Hub`} />
+                    <BrowserFrame shot={{ ...shot, alt: "" }} url={`${v.name} · API Hub`} />
                     <p className="mt-4 text-sm text-muted">{shot.alt}</p>
                   </li>
                 ))}

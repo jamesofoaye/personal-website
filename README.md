@@ -40,3 +40,11 @@ Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical U
 ## Design
 
 The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF2E`, Commissioner type, the JamesOfoAye wordmark, black section labels with a gold orb, outline pill buttons. The globe links Accra and Abu Dhabi; on devices without a GPU, or with reduced motion, it renders a still frame.
+
+## SEO and AI answer engines
+
+- **Structured data** (`lib/structured-data.ts`): Person and WebSite on every page, ProfilePage with a project list on `/` and `/about`, CreativeWork and BreadcrumbList on each case study, FAQPage on `/about`.
+- **FAQ** (`lib/faq.ts`): short factual answers shown on `/about` and published as FAQPage data, so search and AI tools can quote them.
+- **`/llms.txt` and `/llms-full.txt`**: markdown summaries of the site for AI assistants, generated from `lib/content.ts`.
+- **robots.txt** allows all crawlers and names the main AI crawlers explicitly. **sitemap.xml** lists every page and its screenshots; bump `UPDATED` in `app/sitemap.ts` when content changes.
+- **Open Graph images** are generated per page, including one per case study.

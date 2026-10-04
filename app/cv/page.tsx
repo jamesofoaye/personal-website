@@ -7,7 +7,7 @@ import { PrintButton } from "./print-button";
 export const metadata: Metadata = {
   title: "CV",
   description:
-    "James Ofori Ayerakwa — Lead Frontend & Applied AI Engineer. Experience, ventures and skills.",
+    "The CV of James Ofori Ayerakwa, a Lead Frontend and Applied AI Engineer in Abu Dhabi. It lists his experience, the products he has built and his skills.",
   alternates: { canonical: "/cv" },
 };
 

@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import { PERSON } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 const subscribe = () => () => {};
 const address = () => PERSON.emailParts.join("@");
@@ -46,6 +47,7 @@ export function CopyEmail({ className }: { className?: string }) {
         try {
           await navigator.clipboard.writeText(address());
           setCopied(true);
+          trackEvent("email_copied");
           setTimeout(() => setCopied(false), 2000);
         } catch {
           window.location.href = `mailto:${address()}`;

@@ -56,7 +56,7 @@ export default function AboutPage() {
         </p>
       </PageIntro>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      <section data-section="story" className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <ol className="relative border-s border-line">
           {CHAPTERS.map((c, i) => (
             <li key={c.year} className="relative ps-8 pb-14 last:pb-0 sm:ps-14">
@@ -74,7 +74,10 @@ export default function AboutPage() {
         </ol>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 py-20 sm:px-8 md:grid-cols-3">
+      <section
+        data-section="how_i_work"
+        className="mx-auto grid max-w-7xl gap-6 px-5 py-20 sm:px-8 md:grid-cols-3"
+      >
         {[
           {
             k: "How I work",
@@ -100,7 +103,11 @@ export default function AboutPage() {
         ))}
       </section>
 
-      <section aria-labelledby="faq-title" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
+      <section
+        aria-labelledby="faq-title"
+        data-section="faq"
+        className="mx-auto max-w-7xl px-5 py-20 sm:px-8"
+      >
         <JsonLd data={faqGraph()} />
         <JsonLd data={profilePageGraph("/about", "About James Ofori Ayerakwa")} />
         <h2 id="faq-title" className="font-display text-4xl text-ink sm:text-5xl">
@@ -116,7 +123,7 @@ export default function AboutPage() {
         </dl>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-28 sm:px-8">
+      <section data-section="say_hello" className="mx-auto max-w-7xl px-5 pb-28 sm:px-8">
         <Link
           href="/#contact"
           className="group inline-flex items-baseline gap-4 font-display text-5xl text-ink sm:text-6xl"

@@ -1,91 +1,93 @@
 import { ImageResponse } from "next/og";
-import { ogFonts } from "@/lib/og-fonts";
+import { ogAsset, ogFonts } from "@/lib/og-fonts";
+import { GOLD, INK, OG_SIZE, Phone } from "@/components/og";
 
-export const alt = "James Ofori Ayerakwa — Lead Frontend & Applied AI Engineer";
-export const size = { width: 1200, height: 630 };
+export const alt = "James Ofori Ayerakwa, Lead Frontend and Applied AI Engineer in Abu Dhabi";
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
 export default async function OgImage() {
-  // dotted arc motif drawn with plain divs — no external fonts or images needed
-  const dots = Array.from({ length: 26 }, (_, i) => {
-    const t = i / 25;
-    const x = 700 + t * 420;
-    const y = 430 - Math.sin(t * Math.PI) * 230;
-    return { x, y, s: i === 0 || i === 25 ? 18 : 6 };
-  });
+  const [hisab, di, dawurobo] = await Promise.all([
+    ogAsset("hisab-home.jpg"),
+    ogAsset("drivinginstructor-home.jpg"),
+    ogAsset("dawurobo-home.jpg"),
+  ]);
   return new ImageResponse(
     <div
       style={{
         width: "100%",
         height: "100%",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         background: "#ffffff",
+        color: INK,
         fontFamily: "Commissioner",
         fontWeight: 500,
-        color: "#0e1017",
-        padding: 72,
-        position: "relative",
       }}
     >
       <div
         style={{
-          position: "absolute",
-          right: -200,
-          top: -150,
-          width: 900,
-          height: 900,
-          borderRadius: 9999,
-          background: "radial-gradient(circle, rgba(230,175,46,0.22), rgba(230,175,46,0) 60%)",
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          width: 650,
+          padding: "64px 0 56px 64px",
         }}
-      />
-      {dots.map((d, i) => (
-        <div
-          key={i}
-          style={{
-            position: "absolute",
-            left: d.x,
-            top: d.y,
-            width: d.s,
-            height: d.s,
-            borderRadius: 9999,
-            background: "#e6af2e",
-            opacity: d.s > 6 ? 1 : 0.7,
-            display: "flex",
-          }}
-        />
-      ))}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span style={{ fontSize: 26, fontWeight: 800 }}>Hello, I&apos;m</span>
+          <div style={{ display: "flex", width: 90, height: 5, background: INK, marginTop: 6 }} />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 112,
+              fontWeight: 800,
+              letterSpacing: -5,
+              lineHeight: 0.92,
+            }}
+          >
+            James Ofori
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 34,
+              fontWeight: 800,
+              marginTop: 26,
+              lineHeight: 1.2,
+              maxWidth: 560,
+            }}
+          >
+            I build web and mobile products, and the AI features inside them.
+          </div>
+          <div
+            style={{ display: "flex", width: 150, height: 6, background: GOLD, marginTop: 14 }}
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 22, color: "#4a4d57" }}>
+          <span>Lead Frontend &amp; Applied AI Engineer · Abu Dhabi</span>
+          <span style={{ marginTop: 4, color: "#676a74" }}>
+            Verinvo · Hisab · DrivingInstructor.ae · Dawurobo · jamesofoaye.dev
+          </span>
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
-          fontSize: 22,
-          letterSpacing: 4,
-          color: "#4a4d57",
-          textTransform: "uppercase",
+          flex: 1,
+          margin: "32px 32px 32px 0",
+          borderRadius: 28,
+          overflow: "hidden",
+          justifyContent: "center",
+          background: "linear-gradient(160deg, #fbf3dd 0%, #f7f7f8 60%)",
         }}
       >
-        Lead Frontend &amp; Applied AI Engineer
-      </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{
-            fontSize: 96,
-            lineHeight: 1,
-            fontWeight: 800,
-            letterSpacing: -3,
-            display: "flex",
-          }}
-        >
-          James Ofori
+        <div style={{ display: "flex", alignItems: "flex-start", marginTop: 110 }}>
+          <Phone src={di} width={170} rotate={-7} top={40} />
+          <Phone src={hisab} width={200} />
+          <Phone src={dawurobo} width={170} rotate={7} top={40} />
         </div>
-        <div style={{ fontSize: 40, color: "#4a4d57", marginTop: 20, display: "flex" }}>
-          I build web and mobile products, and the AI inside them.
-        </div>
-      </div>
-      <div style={{ display: "flex", fontSize: 22, color: "#676a74" }}>
-        Accra and Abu Dhabi · Verinvo · Hisab · DrivingInstructor.ae · Dawurobo
       </div>
     </div>,
     { ...size, fonts: await ogFonts() },

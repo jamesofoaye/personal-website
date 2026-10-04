@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { NAV } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 export function Wordmark() {
   return (
@@ -77,6 +78,9 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                data-track="nav_clicked"
+                data-track-item={item.label}
+                data-track-menu="desktop"
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className="group relative px-5 py-2 text-[15px] text-ink transition-[font-weight] hover:font-semibold aria-[current=page]:font-semibold"
               >
@@ -94,6 +98,8 @@ export function SiteHeader() {
           <div className="flex items-center gap-2">
             <Link
               href="/#contact"
+              data-track="cta_clicked"
+              data-track-cta="header_lets_talk"
               className="hidden items-center gap-2 rounded-full border-2 border-ink px-5 py-2 text-[15px] text-ink transition-colors hover:bg-ink hover:text-white sm:inline-flex"
             >
               <MailIcon />
@@ -105,7 +111,10 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => {
+                if (!open) trackEvent("mobile_menu_opened");
+                setOpen((v) => !v);
+              }}
             >
               <span className="relative block h-3 w-4" aria-hidden>
                 <span
@@ -142,6 +151,9 @@ export function SiteHeader() {
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
+                      data-track="nav_clicked"
+                      data-track-item={item.label}
+                      data-track-menu="mobile"
                       className="flex items-baseline gap-4 border-b border-line py-3 font-display text-4xl text-ink"
                     >
                       <span className="text-xs font-semibold text-gold-ink">0{i + 1}</span>

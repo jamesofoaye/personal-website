@@ -5,7 +5,11 @@ import { LabelBar } from "@/components/section-heading";
 
 export function Contact() {
   return (
-    <section id="contact" className="relative isolate overflow-hidden px-5 py-32 sm:px-8 sm:py-44">
+    <section
+      id="contact"
+      data-section="contact"
+      className="relative isolate overflow-hidden px-5 py-32 sm:px-8 sm:py-44"
+    >
       <div
         aria-hidden
         className="absolute bottom-[-30%] left-1/2 -z-10 aspect-square w-[120vw] max-w-[1400px] -translate-x-1/2 rounded-full opacity-70 blur-3xl"

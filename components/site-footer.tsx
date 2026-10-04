@@ -22,7 +22,7 @@ export function SiteFooter() {
             <Link
               key={n.href}
               href={n.href}
-              className="w-fit text-muted transition-colors hover:text-ink"
+              className="w-fit py-1.5 text-muted transition-colors hover:text-ink"
             >
               {n.label}
             </Link>
@@ -32,10 +32,10 @@ export function SiteFooter() {
           <p className="mb-2 font-mono text-[11px] tracking-wider text-faint uppercase">
             Elsewhere
           </p>
-          <EmailLink className="w-fit text-muted transition-colors hover:text-ink" />
+          <EmailLink className="w-fit py-1.5 text-muted transition-colors hover:text-ink" />
           <a
             href={PERSON.links.linkedin}
-            className="w-fit text-muted transition-colors hover:text-ink"
+            className="w-fit py-1.5 text-muted transition-colors hover:text-ink"
             rel="me noopener"
             target="_blank"
           >
@@ -43,7 +43,7 @@ export function SiteFooter() {
           </a>
           <a
             href={PERSON.links.github}
-            className="w-fit text-muted transition-colors hover:text-ink"
+            className="w-fit py-1.5 text-muted transition-colors hover:text-ink"
             rel="me noopener"
             target="_blank"
           >

@@ -5,7 +5,11 @@ import { Reveal } from "@/components/reveal";
 
 export function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
+    <section
+      id="experience"
+      data-section="experience"
+      className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36"
+    >
       <SectionHeading
         eyebrow="Working Experience"
         title="I have been building software professionally since 2020."
@@ -36,7 +40,7 @@ export function Experience() {
 export function Skills() {
   const all = SKILLS.flatMap((g) => g.items);
   return (
-    <section aria-labelledby="skills-title" className="py-10">
+    <section aria-labelledby="skills-title" data-section="skills" className="py-10">
       {/* moving band of the stack */}
       <div
         className="relative overflow-hidden border-y border-line py-6 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
@@ -90,7 +94,7 @@ export function Skills() {
 
 export function Archive() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+    <section data-section="other_work" className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
       <Reveal>
         <h2 className="text-sm font-bold tracking-wide text-ink uppercase">
           Other things I have built

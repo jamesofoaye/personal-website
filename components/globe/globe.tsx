@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * A dotted Earth with a live arc from Accra to Abu Dhabi.
@@ -274,8 +275,13 @@ export default function Globe({ className }: { className?: string }) {
     let velX = 0;
     let userOffset = 0;
     let userTilt = 0;
+    let draggedOnce = false;
     const onDown = (e: PointerEvent) => {
       dragging = true;
+      if (!draggedOnce) {
+        draggedOnce = true;
+        trackEvent("globe_dragged", { input: e.pointerType });
+      }
       lastX = e.clientX;
       lastY = e.clientY;
       canvas.setPointerCapture(e.pointerId);

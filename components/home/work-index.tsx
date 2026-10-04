@@ -7,10 +7,12 @@ import { VENTURES } from "@/lib/content";
 import { VentureCover } from "@/components/device";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
+import { trackEvent } from "@/lib/analytics";
 
 export function WorkIndex() {
   const listRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<number | null>(null);
+  const previewed = useRef(new Set<string>());
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 220, damping: 26, mass: 0.6 });
@@ -24,7 +26,11 @@ export function WorkIndex() {
   };
 
   return (
-    <section id="work" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
+    <section
+      id="work"
+      data-section="work"
+      className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36"
+    >
       <SectionHeading
         eyebrow="A few projects so far"
         title="These are the products I work on."
@@ -39,17 +45,30 @@ export function WorkIndex() {
       >
         <ul className="border-t border-line">
           {VENTURES.map((v, i) => (
-            <li key={v.slug} onPointerEnter={() => setActive(i)} className="border-b border-line">
+            <li
+              key={v.slug}
+              onPointerEnter={(e) => {
+                setActive(i);
+                if (e.pointerType === "mouse" && !previewed.current.has(v.slug)) {
+                  previewed.current.add(v.slug);
+                  trackEvent("project_previewed", { project: v.slug });
+                }
+              }}
+              className="border-b border-line"
+            >
               <Reveal y={16} delay={i * 0.04}>
                 <Link
                   href={`/work/${v.slug}`}
+                  data-track="project_opened"
+                  data-track-project={v.slug}
+                  data-track-from="home_list"
                   onFocus={() => setActive(i)}
                   onBlur={() => setActive(null)}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-x-4 gap-y-3 py-7 sm:gap-x-8 sm:py-9 md:grid-cols-[3rem_1.4fr_1.2fr_9rem_2.5rem]"
+                  className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-4 gap-y-3 py-7 sm:gap-x-8 sm:py-9 md:grid-cols-[3rem_1.4fr_1.2fr_9rem_2.5rem]"
                 >
                   <span className="text-sm font-semibold text-faint">0{i + 1}</span>
                   <span
-                    className="w-fit bg-clip-text pb-1 font-display text-[clamp(1.9rem,4.4vw,3.6rem)] leading-none text-transparent transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-2 md:group-hover:translate-x-4"
+                    className={`w-fit max-w-full min-w-0 bg-clip-text pb-1 font-display break-words md:text-[clamp(1.9rem,4.4vw,3.6rem)] ${v.name.length > 12 ? "text-[clamp(1.25rem,6vw,3.6rem)]" : "text-[clamp(1.45rem,7.2vw,3.6rem)]"} leading-none text-transparent transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-2 md:group-hover:translate-x-4`}
                     style={{
                       backgroundImage: `linear-gradient(to right, ${v.gradient[0]}, ${v.gradient[1]})`,
                     }}

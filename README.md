@@ -48,3 +48,32 @@ The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF
 - **`/llms.txt` and `/llms-full.txt`**: markdown summaries of the site for AI assistants, generated from `lib/content.ts`.
 - **robots.txt** allows all crawlers and names the main AI crawlers explicitly. **sitemap.xml** lists every page and its screenshots; bump `UPDATED` in `app/sitemap.ts` when content changes.
 - **Open Graph images** are generated per page, including one per case study.
+
+## Analytics
+
+Events go through `trackEvent()` in `lib/analytics.ts`. They are sent to **Vercel Web Analytics** (custom events, first two properties) and, if `NEXT_PUBLIC_POSTHOG_KEY` is set, to **PostHog** with every property plus pageviews, autocapture, heatmaps and session replay (inputs masked). Speed Insights covers Core Web Vitals.
+
+Most tracking is declarative: add `data-track="event_name"` and `data-track-<prop>="value"` to any link or button. `components/analytics-tracker.tsx` also tracks things automatically.
+
+| Event | When it fires | Properties |
+|---|---|---|
+| `cta_clicked` | Hero and header calls to action | `cta` |
+| `nav_clicked` | Any nav link, desktop or mobile | `item`, `menu` |
+| `mobile_menu_opened` | The mobile menu opens | |
+| `project_previewed` | Hovering a project on desktop (once per project) | `project` |
+| `project_opened` | Opening a case study from the list or "Next" | `project`, `from` |
+| `screens_swiped` | Swiping the screenshot gallery on a case study | `project` |
+| `section_viewed` | A section crosses the middle of the screen (`data-section`) | `section` |
+| `scroll_depth` | 25, 50, 75, 90 and 100% of a page | `percent` |
+| `page_engagement` | Leaving or hiding a page | `seconds_bucket`, `max_scroll` |
+| `tab_returned` | Coming back to the tab | `away_seconds_bucket` |
+| `outbound_link_clicked` | Any external link (LinkedIn, GitHub, live sites, YouTube) | `destination`, `location` |
+| `internal_link_clicked` | Any other internal link | `to`, `location` |
+| `email_clicked` / `email_copied` | Email link or the Copy email button | `location` |
+| `cv_saved_as_pdf` | The Save as PDF button on `/cv` | |
+| `globe_dragged` | First drag of the globe | `input` |
+| `text_copied` | Someone copies text | `length`, `section` |
+| `rage_click` | Three fast clicks in the same spot | `element` |
+| `page_not_found` | A 404 page loads | `referrer` |
+
+Every event also carries `path` and `viewport` (mobile, tablet or desktop) when sent to PostHog.

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { VENTURES } from "@/lib/content";
 import { BrowserFrame, PhoneFrame, VentureCover } from "@/components/device";
 import { Reveal } from "@/components/reveal";
+import { TrackHorizontalScroll } from "@/components/track";
 import { JsonLd } from "@/components/json-ld";
 import { caseStudyGraph } from "@/lib/structured-data";
 
@@ -48,7 +49,7 @@ export default async function CaseStudy({ params }: Props) {
   return (
     <article className="pt-28 sm:pt-36">
       <JsonLd data={caseStudyGraph(v)} />
-      <header className="mx-auto max-w-7xl px-5 sm:px-8">
+      <header data-section="case_header" className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <Link
             href="/#work"
@@ -130,37 +131,45 @@ export default async function CaseStudy({ params }: Props) {
           venture={v}
           size="hero"
           priority
-          className="aspect-[4/5] rounded-xl sm:aspect-[16/9] lg:aspect-[21/10]"
+          className={`rounded-xl sm:aspect-[16/9] lg:aspect-[21/10] ${v.shots[0]?.frame === "browser" ? "aspect-[5/4]" : "aspect-[4/5]"}`}
         />
       </Reveal>
 
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <dl className="grid gap-px overflow-hidden border-b border-line bg-line sm:grid-cols-3">
+        <dl className="grid grid-cols-3 gap-px overflow-hidden border-b border-line bg-line">
           {v.metrics.map((m, i) => (
             <Reveal
               key={m.label}
               delay={i * 0.06}
-              className="flex flex-col-reverse bg-bg py-8 sm:px-6 sm:first:pl-0"
+              className="flex flex-col-reverse bg-bg px-2 py-6 first:pl-0 sm:px-6 sm:py-8"
             >
-              <dt className="mt-1 text-sm text-muted">{m.label}</dt>
-              <dd className="font-display text-5xl text-ink">{m.value}</dd>
+              <dt className="mt-2 text-xs leading-snug text-muted sm:text-sm">{m.label}</dt>
+              <dd className="font-display text-[clamp(1.4rem,7vw,3rem)] leading-none break-words text-ink">
+                {m.value}
+              </dd>
             </Reveal>
           ))}
         </dl>
 
-        <section className="grid gap-6 py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
+        <section
+          data-section="why_it_exists"
+          className="grid gap-6 py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28"
+        >
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
             Why it exists
           </h2>
           <Reveal>
-            <p className="font-display text-3xl leading-tight text-pretty text-ink sm:text-4xl">
+            <p className="font-display text-2xl leading-tight text-pretty text-ink sm:text-4xl">
               {v.summary}
             </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{v.problem}</p>
           </Reveal>
         </section>
 
-        <section className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
+        <section
+          data-section="what_i_built"
+          className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28"
+        >
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
             {v.builtHeading ?? "What I built"}
           </h2>
@@ -178,7 +187,10 @@ export default async function CaseStudy({ params }: Props) {
         </section>
 
         {v.ai && (
-          <section className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
+          <section
+            data-section="how_ai_is_used"
+            className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28"
+          >
             <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
               How AI is used
             </h2>
@@ -196,19 +208,28 @@ export default async function CaseStudy({ params }: Props) {
         )}
 
         {v.shots.length > 1 && (
-          <section className="border-t border-line py-20 md:py-28">
+          <section data-section="screens" className="border-t border-line py-20 md:py-28">
             <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
               Screens
             </h2>
             {v.shots[0]!.frame === "phone" ? (
-              <ul className="-mx-5 mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-6 sm:mx-0 sm:px-0 [scrollbar-width:thin]">
-                {v.shots.map((shot) => (
-                  <li key={shot.src} className="w-[62%] shrink-0 snap-center sm:w-[240px]">
-                    <PhoneFrame shot={{ ...shot, alt: "" }} sizes="240px" />
-                    <p className="mt-4 text-sm text-muted">{shot.alt}</p>
-                  </li>
-                ))}
-              </ul>
+              <TrackHorizontalScroll
+                event="screens_swiped"
+                props={{ project: v.slug }}
+                className="-mx-5 mt-10 snap-x snap-mandatory overflow-x-auto px-5 pb-6 sm:mx-0 sm:px-0 [scrollbar-width:thin]"
+              >
+                <ul className="flex w-max gap-6">
+                  {v.shots.map((shot) => (
+                    <li
+                      key={shot.src}
+                      className="w-[62vw] max-w-[260px] shrink-0 snap-center sm:w-[240px]"
+                    >
+                      <PhoneFrame shot={{ ...shot, alt: "" }} sizes="240px" />
+                      <p className="mt-4 text-sm text-muted">{shot.alt}</p>
+                    </li>
+                  ))}
+                </ul>
+              </TrackHorizontalScroll>
             ) : (
               <ul className="mt-10 grid gap-10">
                 {v.shots.map((shot) => (
@@ -222,7 +243,10 @@ export default async function CaseStudy({ params }: Props) {
           </section>
         )}
 
-        <section className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12">
+        <section
+          data-section="stack"
+          className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12"
+        >
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Stack</h2>
           <div>
             <ul className="flex flex-wrap gap-2">
@@ -240,11 +264,17 @@ export default async function CaseStudy({ params }: Props) {
         </section>
       </div>
 
-      <Link href={`/work/${next.slug}`} className="group block border-t border-line">
+      <Link
+        href={`/work/${next.slug}`}
+        data-track="project_opened"
+        data-track-project={next.slug}
+        data-track-from="next_project"
+        className="group block border-t border-line"
+      >
         <div className="mx-auto flex max-w-7xl items-end justify-between gap-6 px-5 py-20 sm:px-8 sm:py-28">
-          <div>
+          <div className="min-w-0">
             <p className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">Next</p>
-            <p className="mt-3 font-display text-[clamp(3rem,9vw,8rem)] leading-none text-ink transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-4">
+            <p className="mt-3 font-display text-[clamp(2rem,9vw,8rem)] break-words leading-none text-ink transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-4">
               {next.name}
             </p>
           </div>

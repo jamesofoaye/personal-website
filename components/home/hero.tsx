@@ -17,7 +17,11 @@ export function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden pt-28 sm:pt-32">
+    <section
+      ref={ref}
+      data-section="hero"
+      className="relative isolate overflow-hidden pt-28 sm:pt-32"
+    >
       {/* soft light behind the globe */}
       <div
         aria-hidden
@@ -64,18 +68,22 @@ export function Hero() {
           </p>
 
           <div
-            className="rise mt-8 flex flex-wrap items-center gap-4"
+            className="rise mt-8 flex items-center gap-3 sm:gap-4"
             style={{ animationDelay: "0.4s" }}
           >
             <Link
               href="/#work"
-              className="inline-flex items-center rounded-full border border-ink bg-ink px-10 py-3 text-lg text-white transition-colors hover:bg-white hover:text-ink"
+              data-track="cta_clicked"
+              data-track-cta="see_the_work"
+              className="inline-flex flex-1 items-center justify-center rounded-full border border-ink bg-ink px-5 py-3 text-base whitespace-nowrap text-white sm:flex-none sm:px-10 sm:text-lg transition-colors hover:bg-white hover:text-ink"
             >
               See the work
             </Link>
             <Link
               href="/#contact"
-              className="inline-flex items-center rounded-full border border-ink px-10 py-3 text-lg text-ink transition-colors hover:bg-ink hover:text-white"
+              data-track="cta_clicked"
+              data-track-cta="get_in_touch"
+              className="inline-flex flex-1 items-center justify-center rounded-full border border-ink px-5 py-3 text-base whitespace-nowrap text-ink sm:flex-none sm:px-10 sm:text-lg transition-colors hover:bg-ink hover:text-white"
             >
               Get in touch
             </Link>
@@ -94,8 +102,9 @@ export function Hero() {
           >
             <GlobeLoader className="absolute inset-0" />
           </motion.div>
-          <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-[11px] font-medium tracking-[0.14em] whitespace-nowrap text-faint uppercase lg:bottom-10">
-            5.60°N 0.19°W <span className="text-gold">⟶</span> 24.45°N 54.38°E · drag to spin
+          <p className="pointer-events-none absolute bottom-3 left-1/2 w-[92%] -translate-x-1/2 text-center text-[10px] font-medium tracking-[0.12em] text-faint uppercase sm:w-auto sm:text-[11px] sm:tracking-[0.14em] sm:whitespace-nowrap lg:bottom-10">
+            5.60°N 0.19°W <span className="text-gold">⟶</span> 24.45°N 54.38°E{" "}
+            <span className="hidden sm:inline">· drag to spin</span>
           </p>
         </motion.div>
       </div>
@@ -110,7 +119,7 @@ export function Hero() {
               style={{ animationDelay: `${0.5 + i * 0.06}s` }}
             >
               <dt className="sr-only">{s.label}</dt>
-              <dd className="font-display text-4xl text-ink sm:text-[2.75rem]">{s.value}</dd>
+              <dd className="font-display text-[clamp(1.6rem,8vw,2.75rem)] text-ink">{s.value}</dd>
               <dd className="mt-1 text-sm text-muted">{s.label}</dd>
             </div>
           ))}

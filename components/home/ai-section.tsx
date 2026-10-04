@@ -19,7 +19,7 @@ const PRINCIPLES = [
 
 export function AiSection() {
   return (
-    <section id="ai" className="px-3 sm:px-5">
+    <section id="ai" data-section="ai" className="px-3 sm:px-5">
       <div className="relative isolate mx-auto max-w-[96rem] overflow-hidden rounded-2xl bg-[#0e1017] px-5 py-24 text-white ring-1 ring-white/10  sm:px-10 sm:py-32 lg:px-16">
         <div
           aria-hidden

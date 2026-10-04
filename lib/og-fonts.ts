@@ -12,3 +12,9 @@ export async function ogFonts() {
     { name: "Commissioner", data: regular, weight: 500 as const, style: "normal" as const },
   ];
 }
+
+/** Reads an OG screenshot from app/og-assets as a data URL. */
+export async function ogAsset(file: string) {
+  const buf = await readFile(join(process.cwd(), "app/og-assets", file));
+  return `data:image/jpeg;base64,${buf.toString("base64")}`;
+}

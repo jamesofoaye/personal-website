@@ -57,73 +57,72 @@ export default async function CaseStudy({ params }: Props) {
             ← All work
           </Link>
         </Reveal>
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
-          <div>
-            <p className="label-bar text-[15px]">
-              {v.kind}
-              <span
-                aria-hidden
-                className="size-[15px] rounded-full"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(227,173,46,1) 0%, rgba(41,47,143,0) 100%)",
-                }}
-              />
-            </p>
-            <h1
-              className="mt-4 w-fit bg-clip-text pb-2 font-display text-[clamp(3.2rem,9vw,8rem)] leading-[0.95] text-transparent"
+        <div className="mt-10">
+          <p className="label-bar text-[15px]">
+            {v.kind}
+            <span
+              aria-hidden
+              className="size-[15px] rounded-full"
               style={{
-                backgroundImage: `linear-gradient(to right, ${v.gradient[0]}, ${v.gradient[1]})`,
+                background:
+                  "linear-gradient(to bottom, rgba(227,173,46,1) 0%, rgba(41,47,143,0) 100%)",
               }}
-            >
-              {v.name}
-            </h1>
-            <Reveal delay={0.2}>
-              <p className="mt-4 max-w-2xl text-2xl leading-snug font-semibold text-muted sm:text-3xl">
-                {v.tagline}
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.25}>
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 text-sm">
-              <div className="col-span-2">
-                <dt className="font-mono text-[10px] tracking-[0.16em] text-faint uppercase">
-                  Role
-                </dt>
-                <dd className="mt-1 text-ink">{v.role}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[10px] tracking-[0.16em] text-faint uppercase">
-                  When
-                </dt>
-                <dd className="mt-1 text-ink">{v.period}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-[10px] tracking-[0.16em] text-faint uppercase">
-                  Where
-                </dt>
-                <dd className="mt-1 text-ink">{v.place}</dd>
-              </div>
-              {v.url && (
-                <div className="col-span-2">
-                  <dt className="font-mono text-[10px] tracking-[0.16em] text-faint uppercase">
-                    Live
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={v.url}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-ink underline decoration-gold decoration-2 underline-offset-4"
-                    >
-                      {v.urlLabel} ↗
-                    </a>
-                  </dd>
-                </div>
-              )}
-            </dl>
+            />
+          </p>
+          <h1
+            className={`mt-6 w-fit max-w-full bg-clip-text pb-2 font-display leading-[0.95] break-words text-transparent ${
+              v.name.length > 12
+                ? "text-[clamp(1.75rem,8vw,6.5rem)]"
+                : "text-[clamp(3.2rem,9vw,8rem)]"
+            }`}
+            style={{
+              backgroundImage: `linear-gradient(to right, ${v.gradient[0]}, ${v.gradient[1]})`,
+            }}
+          >
+            {v.name}
+          </h1>
+          <Reveal delay={0.2}>
+            <p className="mt-6 max-w-3xl text-lg leading-snug font-semibold text-muted sm:text-2xl lg:text-3xl">
+              {v.tagline}
+            </p>
           </Reveal>
         </div>
+
+        <Reveal delay={0.25}>
+          <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 md:grid-cols-4">
+            <div>
+              <dt className="font-mono text-[11px] tracking-[0.16em] text-faint uppercase">Role</dt>
+              <dd className="mt-2 text-[15px] text-ink">{v.role}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] tracking-[0.16em] text-faint uppercase">When</dt>
+              <dd className="mt-2 text-[15px] text-ink">{v.period}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] tracking-[0.16em] text-faint uppercase">
+                Where
+              </dt>
+              <dd className="mt-2 text-[15px] text-ink">{v.place}</dd>
+            </div>
+            {v.url && (
+              <div>
+                <dt className="font-mono text-[11px] tracking-[0.16em] text-faint uppercase">
+                  Live
+                </dt>
+                <dd className="mt-2 text-[15px]">
+                  <a
+                    href={v.url}
+                    target="_blank"
+                    rel="noopener"
+                    className="break-all text-ink underline decoration-gold decoration-2 underline-offset-4"
+                  >
+                    {v.urlLabel}&nbsp;↗
+                  </a>
+                </dd>
+              </div>
+            )}
+          </dl>
+        </Reveal>
       </header>
 
       <Reveal className="mx-auto mt-14 max-w-[96rem] px-3 sm:px-5" y={40}>

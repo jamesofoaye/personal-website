@@ -117,7 +117,7 @@ export default async function CaseStudy({ params }: Props) {
           venture={v}
           size="hero"
           priority
-          className="aspect-[4/5] rounded-[2rem] sm:aspect-[16/9] sm:rounded-[2.5rem] lg:aspect-[21/10]"
+          className="aspect-[4/5] rounded-xl sm:aspect-[16/9] lg:aspect-[21/10]"
         />
       </Reveal>
 
@@ -172,7 +172,7 @@ export default async function CaseStudy({ params }: Props) {
             <div className="grid gap-4">
               {v.ai.map((a, i) => (
                 <Reveal key={a.title} delay={i * 0.06}>
-                  <div className="rounded-3xl border border-line bg-surface p-6 sm:p-8">
+                  <div className="rounded-xl border border-line bg-surface p-6 sm:p-8">
                     <h3 className="font-display text-3xl text-ink">{a.title}</h3>
                     <p className="mt-3 leading-relaxed text-muted">{a.body}</p>
                   </div>

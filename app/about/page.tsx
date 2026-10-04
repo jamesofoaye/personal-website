@@ -89,7 +89,7 @@ export default function AboutPage() {
           <Reveal
             key={x.k}
             delay={i * 0.06}
-            className="rounded-3xl border border-line bg-surface p-7"
+            className="rounded-xl border border-line bg-surface p-7"
           >
             <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">{x.k}</h2>
             <p className="mt-4 leading-relaxed text-ink">{x.v}</p>

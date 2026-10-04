@@ -73,7 +73,7 @@ export function WorkIndex() {
                   </span>
                   <VentureCover
                     venture={v}
-                    className="col-span-3 aspect-[4/3] rounded-2xl md:hidden"
+                    className="col-span-3 aspect-[4/3] rounded-xl md:hidden"
                   />
                 </Link>
               </Reveal>
@@ -99,7 +99,7 @@ export function WorkIndex() {
               >
                 <VentureCover
                   venture={VENTURES[active]}
-                  className="aspect-[4/3] w-[400px] rounded-2xl shadow-2xl ring-1 ring-line"
+                  className="aspect-[4/3] w-[400px] rounded-xl shadow-2xl ring-1 ring-line"
                 />
               </motion.div>
             )}

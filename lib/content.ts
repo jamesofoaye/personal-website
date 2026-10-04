@@ -559,25 +559,37 @@ export const SKILLS = [
   },
 ] as const;
 
-export const ARCHIVE = [
-  {
-    name: "BG Empire",
-    note: "An online store for personalised passport covers, built on Shopify with a custom front end.",
-    stack: "Next.js · Shopify",
-  },
-  {
-    name: "SkinPlus Medspa",
-    note: "A website for a medical spa, with their services and bookings.",
-    stack: "Next.js · Firebase",
-    url: "https://skinplusofficial.com/",
-  },
-  {
-    name: "Dawurobo Safe",
-    note: "A service that protects people when they buy from sellers they don't know online.",
-    stack: "Next.js · Firebase",
-    url: "https://safe.dawurobo.com/",
-  },
-] as const;
+export const ARCHIVE: { name: string; note: string; stack: string; url: string; image: string }[] =
+  [
+    {
+      name: "StyleNect",
+      note: "StyleNect is a booking and management system for salons and spas in Ghana. It handles appointments, staff schedules, customers, invoices and SMS reminders, and customers get their own portal.",
+      stack: "React · Firebase",
+      url: "https://stylenect.com/",
+      image: "/work/archive/stylenect.webp",
+    },
+    {
+      name: "BG Empire",
+      note: "BG Empire is an online store from Accra that sells phone cases and passport covers people can personalise. I built it on Shopify with a custom front end.",
+      stack: "Next.js · Shopify",
+      url: "https://bgempire.store/",
+      image: "/work/archive/bg-empire.webp",
+    },
+    {
+      name: "Dawurobo Safe",
+      note: "Dawurobo Safe is a marketplace where people in Ghana can buy from businesses that have been verified through real Dawurobo deliveries.",
+      stack: "Next.js · Firebase",
+      url: "https://safe.dawurobo.com/",
+      image: "/work/archive/dawurobo-safe.webp",
+    },
+    {
+      name: "SkinPlus Medspa",
+      note: "SkinPlus Medspa is a medical spa in Ghana. I built their website, which covers their services, memberships and how to find them.",
+      stack: "Next.js · Firebase",
+      url: "https://skinplusofficial.com/",
+      image: "/work/archive/skinplus.webp",
+    },
+  ];
 
 export const HERO_STATS: Metric[] = [
   { value: "6+", label: "years building production web and mobile apps" },

@@ -20,7 +20,7 @@ const PRINCIPLES = [
 export function AiSection() {
   return (
     <section id="ai" className="px-3 sm:px-5">
-      <div className="relative isolate mx-auto max-w-[96rem] overflow-hidden rounded-[2rem] bg-[#0e1017] px-5 py-24 text-white ring-1 ring-white/10 sm:rounded-[2.5rem] sm:px-10 sm:py-32 lg:px-16">
+      <div className="relative isolate mx-auto max-w-[96rem] overflow-hidden rounded-2xl bg-[#0e1017] px-5 py-24 text-white ring-1 ring-white/10  sm:px-10 sm:py-32 lg:px-16">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-[0.08]"
@@ -51,7 +51,7 @@ export function AiSection() {
                 className={i === 0 ? "sm:col-span-2" : s.wide ? "lg:col-span-2" : undefined}
               >
                 <Reveal delay={(i % 3) * 0.08} className="h-full">
-                  <article className="group relative flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-500 hover:border-[#e6af2e]/50 hover:bg-white/[0.05]">
+                  <article className="group relative flex h-full flex-col rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-500 hover:border-[#e6af2e]/50 hover:bg-white/[0.05]">
                     <div className="flex items-center justify-between">
                       <h3 className="font-display text-2xl">{s.name}</h3>
                       <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[10px] tracking-wider text-[#a9acb5] uppercase">

@@ -15,7 +15,7 @@ export function PhoneFrame({
 }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-[2.2rem] border-[7px] border-[#0e1017] bg-[#0e1017] shadow-[0_30px_60px_-20px_rgb(14_16_23/0.45)] ${className}`}
+      className={`relative overflow-hidden rounded-[1.35rem] border-[4px] border-[#0e1017] bg-[#0e1017] shadow-[0_20px_40px_-20px_rgb(14_16_23/0.35)] ${className}`}
     >
       <Image
         src={shot.src}
@@ -24,7 +24,7 @@ export function PhoneFrame({
         height={shot.h}
         sizes={sizes}
         priority={priority}
-        className="block h-auto w-full rounded-[1.6rem]"
+        className="block h-auto w-full rounded-[1.1rem]"
       />
     </div>
   );
@@ -45,7 +45,7 @@ export function BrowserFrame({
 }) {
   return (
     <div
-      className={`overflow-hidden rounded-xl border border-line bg-white shadow-[0_30px_60px_-24px_rgb(14_16_23/0.35)] ${className}`}
+      className={`overflow-hidden rounded-lg border border-line bg-white shadow-[0_20px_40px_-24px_rgb(14_16_23/0.3)] ${className}`}
     >
       <div
         className="flex items-center gap-2 border-b border-line bg-surface px-4 py-2.5"

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { EXPERIENCE, SKILLS, ARCHIVE } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
@@ -91,44 +92,47 @@ export function Archive() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
       <Reveal>
-        <h2 className="text-sm font-bold tracking-wide text-ink uppercase">Also built</h2>
+        <h2 className="text-sm font-bold tracking-wide text-ink uppercase">
+          Other things I have built
+        </h2>
       </Reveal>
-      <ul className="mt-6 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
-        {ARCHIVE.map((a) => {
-          const inner = (
-            <>
-              <p className="flex items-center justify-between font-display text-2xl text-ink">
-                {a.name}
-                {"url" in a && (
-                  <span
-                    className="font-sans text-sm text-faint transition-colors group-hover:text-gold"
-                    aria-hidden
-                  >
-                    ↗
-                  </span>
-                )}
-              </p>
-              <p className="mt-1 text-sm text-muted">{a.note}</p>
-              <p className="mt-4 text-xs font-medium text-faint">{a.stack}</p>
-            </>
-          );
-          return (
-            <li key={a.name} className="bg-bg">
-              {"url" in a ? (
-                <a
-                  href={a.url}
-                  target="_blank"
-                  rel="noopener"
-                  className="group block h-full p-6 transition-colors hover:bg-surface"
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div className="h-full p-6">{inner}</div>
-              )}
-            </li>
-          );
-        })}
+      <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+        {ARCHIVE.map((a, i) => (
+          <li key={a.name}>
+            <Reveal delay={(i % 2) * 0.06} className="h-full">
+              <a
+                href={a.url}
+                target="_blank"
+                rel="noopener"
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgb(14_16_23/0.35)]"
+              >
+                <div className="overflow-hidden border-b border-line bg-surface">
+                  <Image
+                    src={a.image}
+                    alt={`The ${a.name} website`}
+                    width={800}
+                    height={500}
+                    sizes="(min-width: 640px) 600px, 100vw"
+                    className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="flex items-center justify-between font-display text-2xl text-ink">
+                    {a.name}
+                    <span
+                      className="font-sans text-sm text-faint transition-colors group-hover:text-ink"
+                      aria-hidden
+                    >
+                      ↗
+                    </span>
+                  </p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{a.note}</p>
+                  <p className="mt-auto pt-4 text-xs font-medium text-faint">{a.stack}</p>
+                </div>
+              </a>
+            </Reveal>
+          </li>
+        ))}
       </ul>
     </section>
   );

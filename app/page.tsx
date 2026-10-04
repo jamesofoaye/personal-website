@@ -1,17 +1,19 @@
-import { Nav } from "@/components/nav";
-import { HeroParallax } from "@/components/hero";
-import Technologies from "@/components/technologies";
-import Experience from "@/components/experience";
-import Projects from "@/components/projects";
+import { Hero } from "@/components/home/hero";
+import { WorkIndex } from "@/components/home/work-index";
+import { AiSection } from "@/components/home/ai-section";
+import { Experience, Skills, Archive } from "@/components/home/experience";
+import { Contact } from "@/components/home/contact";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Nav />
-      <HeroParallax />
-      <Technologies />
+      <Hero />
+      <WorkIndex />
+      <AiSection />
       <Experience />
-      <Projects />
+      <Skills />
+      <Archive />
+      <Contact />
     </>
   );
 }

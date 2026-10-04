@@ -1,39 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# jamesofoaye.dev
 
-## Getting Started
+Personal site of James Ofori Ayerakwa — Lead Frontend & Applied AI Engineer.
 
-First, run the development server:
+Next.js 16 (App Router) · React 19 · Tailwind 4 · three.js · motion · Lenis · MDX. Deployed on Vercel.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical URLs, the sitemap, OG images and JSON-LD. Default: `https://jamesofoaye.dev`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| What | Where |
+|---|---|
+| All copy: ventures, AI systems, experience, skills | `lib/content.ts` |
+| Name, links, nav, site URL | `lib/site.ts` |
+| Now page (edit monthly, bump the date in `page.tsx`) | `app/now/content.mdx` |
+| Case studies (generated from `lib/content.ts`) | `app/work/[slug]/page.tsx` |
+| Product screenshots | `public/work/<slug>/*.webp` |
+| Globe | `components/globe/globe.tsx` |
+| Globe land dots (regenerate with `npm run globe:data`) | `public/globe/land.bin` |
+| Brand tokens (white, `#0E1017`, gold `#E6AF2E`, Commissioner) | `app/globals.css` |
 
-## Learn More
+## Guardrails for copy
 
-To learn more about Next.js, take a look at the following resources:
+- No job-search signals ("open to work", "hire me").
+- No phone numbers, date of birth or address. Email is assembled client-side.
+- Oxinus/Verinvo: public facts only — no client names, team sizes or roadmap. Ask Verinvo is credited as a team effort.
+- Hubtel was integrated, not built.
+- Hisab is a financial wellness app, described through user outcomes; never "advice" or "debt management".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## UI Design
-https://www.figma.com/design/Ciicg59qr9nFtkMKFZNBQJ/Ayerakwa-James-Master?node-id=0-1&node-type=canvas&t=WXH7hb8PopV6MLeH-0
+The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF2E`, Commissioner type, the JamesOfoAye wordmark, black section labels with a gold orb, outline pill buttons. The globe links Accra and Abu Dhabi; on devices without a GPU, or with reduced motion, it renders a still frame.

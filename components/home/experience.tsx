@@ -98,15 +98,17 @@ export function Archive() {
       </Reveal>
       <ul className="mt-8 grid gap-6 sm:grid-cols-2">
         {ARCHIVE.map((a, i) => (
-          <li key={a.name}>
+          <li key={a.name} className={i === 0 ? "sm:col-span-2" : undefined}>
             <Reveal delay={(i % 2) * 0.06} className="h-full">
               <a
                 href={a.url}
                 target="_blank"
                 rel="noopener"
-                className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgb(14_16_23/0.35)]"
+                className={`group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-white transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgb(14_16_23/0.35)] ${i === 0 ? "sm:flex-row" : ""}`}
               >
-                <div className="overflow-hidden border-b border-line bg-surface">
+                <div
+                  className={`overflow-hidden border-b border-line bg-surface ${i === 0 ? "sm:w-1/2 sm:shrink-0 sm:border-e sm:border-b-0" : ""}`}
+                >
                   <Image
                     src={a.image}
                     alt={`The ${a.name} website`}
@@ -116,7 +118,9 @@ export function Archive() {
                     className="block h-auto w-full transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.02]"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-6">
+                <div
+                  className={`flex flex-1 flex-col p-6 ${i === 0 ? "sm:justify-center sm:p-10" : ""}`}
+                >
                   <p className="flex items-center justify-between font-display text-2xl text-ink">
                     {a.name}
                     <span

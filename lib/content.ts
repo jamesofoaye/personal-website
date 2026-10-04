@@ -90,8 +90,8 @@ export const VENTURES: Venture[] = [
         body: "I built and maintain the role-based access package that every Oxinus product team uses. Because of it, permissions work the same way across all our products.",
       },
       {
-        title: "Email infrastructure",
-        body: "I built the transactional email layer that the whole platform suite sends through.",
+        title: "Email templates",
+        body: "I built the transactional email templates for the platform suite, so every email our products send looks consistent and works across email clients.",
       },
       {
         title: "Arabic and English",
@@ -581,6 +581,13 @@ export const ARCHIVE: { name: string; note: string; stack: string; url: string; 
       stack: "Next.js · Firebase",
       url: "https://safe.dawurobo.com/",
       image: "/work/archive/dawurobo-safe.webp",
+    },
+    {
+      name: "USRN Pathway Consult",
+      note: "USRN Pathway Consult helps nurses and midwives trained outside the US qualify to work there as registered nurses. I built their platform, which covers NCLEX classes, student dashboards, document processing, payments and an admin operations centre.",
+      stack: "Next.js · Firebase",
+      url: "https://www.usrnpathwayconsult.com/",
+      image: "/work/archive/usrn-pathway.webp",
     },
     {
       name: "SkinPlus Medspa",

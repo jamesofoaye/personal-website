@@ -1,37 +1,302 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-.group:hover > .nav_bottom_border {
-	opacity: 1;
+/* ---------- Design tokens: the original jamesofoaye brand ---------- */
+:root {
+  --bg: #ffffff;
+  --surface: #f7f7f8;
+  --surface-2: #efeff1;
+  --ink: #0e1017; /* brand black */
+  --muted: #4a4d57;
+  --faint: #676a74;
+  --line: rgb(14 16 23 / 0.1);
+  --gold: #e6af2e; /* brand gold */
+  --gold-ink: #8a6410; /* gold for small text on white (AA) */
+  --globe-dot: #0e1017;
+  --globe-glow: #e6af2e;
+  --selection: rgb(230 175 46 / 0.35);
 }
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+
+  --font-sans: var(--font-commissioner), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-commissioner), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Display type: Commissioner at full weight, as on the original site. */
+@utility font-display {
+  font-family: var(--font-commissioner), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+/* The original section label: a black bar with a gold orb. */
+@utility label-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.85rem 2.5rem;
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+::selection {
+  background: var(--selection);
+}
+
+:focus-visible {
+  /* ink ring with a gold halo: visible on white (gold alone is ~2:1) */
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgb(230 175 46 / 0.55);
+  border-radius: 4px;
+}
+
+[data-section="ai"] :focus-visible {
+  outline-color: var(--gold);
+  box-shadow: none;
+}
+
+/* Film grain: a quiet texture that keeps flat colour from feeling digital. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
-} */
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* MDX prose for /now and long-form pages */
+.prose-site {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.prose-site h2 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 3rem 0 1rem;
+}
+.prose-site h3 {
+  color: var(--ink);
+  font-weight: 600;
+  margin: 2rem 0 0.5rem;
+}
+.prose-site p {
+  margin: 0 0 1.25rem;
+}
+.prose-site strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.prose-site ul {
+  margin: 0 0 1.25rem;
+  padding-inline-start: 1.25rem;
+  list-style: disc;
+}
+.prose-site li {
+  margin: 0.4rem 0;
+}
+.prose-site li::marker {
+  color: var(--gold);
+}
+.prose-site a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+}
+
+@keyframes flow {
+  0% {
+    top: 4px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 10px);
+    opacity: 0;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .grain::after,
+  body > header,
+  header.fixed,
+  footer {
+    display: none !important;
+  }
+  :root {
+    --ink: #000;
+    --muted: #333;
+    --faint: #555;
+    --line: #ccc;
+    --bg: #fff;
+  }
+}
+
+/* Hero entrance in pure CSS so it plays before hydration (keeps LCP fast). */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes word-up {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.word-up {
+  display: inline-block;
+  animation: word-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Page transitions (React <ViewTransition>): a quick crossfade for the page,
+   and the project title morphs from the list into the case study heading. */
+::view-transition-old(root) {
+  animation: 180ms ease-out both vt-fade-out;
+}
+::view-transition-new(root) {
+  animation: 320ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both vt-fade-in;
+}
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-blur;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes vt-blur {
+  35% {
+    filter: blur(2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

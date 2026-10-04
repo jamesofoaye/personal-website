@@ -13,7 +13,7 @@ export const PERSON = {
   location: "Abu Dhabi, UAE",
   origin: "Ghana",
   description:
-    "Lead Frontend & Applied AI Engineer in Abu Dhabi. I build web, mobile and AI products end to end — Verinvo at Oxinus (IHC), Hisab, DrivingInstructor.ae and Dawurobo.",
+    "I'm James Ofori Ayerakwa, a Lead Frontend and Applied AI Engineer in Abu Dhabi. I lead the frontend of Verinvo at Oxinus (IHC) and build my own products, including Hisab and DrivingInstructor.ae.",
   // Email is split so it never sits in the HTML as a scrapeable string.
   emailParts: ["jamesofoaye", "gmail.com"] as const,
   links: {

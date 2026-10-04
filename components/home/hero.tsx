@@ -37,29 +37,30 @@ export function Hero() {
             <span className="sr-only"> Ayerakwa, Lead Frontend &amp; Applied AI Engineer</span>
           </h1>
 
-          <p className="mt-6 max-w-xl font-display text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.1] text-ink">
-            <CssWords text="Web, mobile & AI products —" delay={0.15} />{" "}
+          <p className="mt-6 max-w-xl font-display text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.12] text-ink">
+            <CssWords text="I build web and mobile products, and the" delay={0.15} />{" "}
             <span className="relative inline-block">
-              <CssWords text="shipped," delay={0.25} />
+              <CssWords text="AI features" delay={0.35} />
               <span aria-hidden className="absolute -bottom-1 left-0 h-1 w-full bg-gold" />
             </span>{" "}
-            <CssWords text="not demoed." delay={0.3} />
+            <CssWords text="inside them." delay={0.42} />
           </p>
 
           <p
             className="rise mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted"
             style={{ animationDelay: "0.3s" }}
           >
-            <span className="font-semibold text-ink">Lead Frontend &amp; Applied AI Engineer</span>{" "}
-            at Oxinus (IHC), leading frontend on{" "}
+            I&rsquo;m a{" "}
+            <span className="font-semibold text-ink">Lead Frontend and Applied AI Engineer</span> at
+            Oxinus, part of IHC, where I lead the frontend of{" "}
             <Link
               href="/work/verinvo"
               className="text-ink underline decoration-gold decoration-2 underline-offset-4"
             >
               Verinvo
             </Link>
-            , the UAE&rsquo;s Ministry of Finance-accredited e-invoicing platform. Outside work I
-            build my own products between Abu Dhabi and Accra.
+            , the UAE&rsquo;s Ministry of Finance-accredited e-invoicing platform. Outside work, I
+            build my own products for people in the UAE and Ghana.
           </p>
 
           <div

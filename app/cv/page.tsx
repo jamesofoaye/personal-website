@@ -14,23 +14,23 @@ export const metadata: Metadata = {
 const STRENGTHS = [
   [
     "Applied AI engineering",
-    "LLM agents, voice, MCP servers, document and photo extraction, privacy-preserving AI on anonymised data.",
+    "I build LLM agents, voice features, MCP servers and document and photo extraction, and I design them so the AI only sees anonymised data.",
   ],
   [
     "Regulated, data-heavy products",
-    "National e-invoicing (B2B/B2G), payments, logistics, marketplaces and credit-report analysis, built within real compliance constraints.",
+    "I have built national e-invoicing, payments, logistics, marketplaces and credit-report analysis, all within real compliance rules.",
   ],
   [
     "Zero-to-one delivery",
-    "Idea to launch across mobile, web and API, and helping lean teams ship more through shared AI-assisted workflows.",
+    "I take products from an idea to launch across mobile, web and API, and I help small teams ship more by sharing AI-assisted workflows.",
   ],
   [
     "Team leadership",
-    "Lead the Dawurobo engineering team; previously led a frontend team at Hexlen; introduced the AI workflows the Verinvo frontend team uses.",
+    "I lead the engineering team at Dawurobo, I led a frontend team at Hexlen, and I introduced the AI workflow the Verinvo frontend team uses today.",
   ],
   [
     "Frontend architecture",
-    "Shared RBAC and design-system packages, RTL-first multilingual UX (EN/AR/HI/UR).",
+    "I build shared permission and design-system packages, and interfaces that work right to left in English, Arabic, Hindi and Urdu.",
   ],
 ] as const;
 
@@ -84,24 +84,26 @@ export default function CvPage() {
       <section className="border-t border-line py-10">
         <h2 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Ventures</h2>
         <div className="mt-6 grid gap-10">
-          {VENTURES.filter((v) => v.slug !== "oja-studios").map((v) => (
-            <div key={v.slug} className="break-inside-avoid">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-xl font-medium text-ink">
-                  {v.name} <span className="font-normal text-muted">— {v.role}</span>
-                </h3>
-                <span className="font-mono text-xs text-faint">{v.period}</span>
+          {VENTURES.filter((v) => v.slug !== "oja-studios" && v.slug !== "personal-vpn").map(
+            (v) => (
+              <div key={v.slug} className="break-inside-avoid">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-xl font-medium text-ink">
+                    {v.name} <span className="font-normal text-muted">— {v.role}</span>
+                  </h3>
+                  <span className="font-mono text-xs text-faint">{v.period}</span>
+                </div>
+                <p className="mt-1 text-muted">{v.summary}</p>
+                <ul className="mt-3 list-disc space-y-1 ps-5 text-[15px] text-muted marker:text-gold">
+                  {[...(v.ai ?? []), ...v.built].slice(0, 5).map((b) => (
+                    <li key={b.title}>
+                      <span className="text-ink">{b.title}.</span> {b.body}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="mt-1 text-muted">{v.summary}</p>
-              <ul className="mt-3 list-disc space-y-1 ps-5 text-[15px] text-muted marker:text-gold">
-                {[...(v.ai ?? []), ...v.built].slice(0, 5).map((b) => (
-                  <li key={b.title}>
-                    <span className="text-ink">{b.title}.</span> {b.body}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ),
+          )}
         </div>
       </section>
 

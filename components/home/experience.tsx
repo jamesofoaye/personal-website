@@ -7,8 +7,8 @@ export function Experience() {
     <section id="experience" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
       <SectionHeading
         eyebrow="Working Experience"
-        title="Six years of shipping, most of it in parallel."
-        intro="Self-taught, coding since 2019, professional since 2020. I work best in small teams, close to product and design, carrying ideas from first sketch to the app stores."
+        title="I have been building software professionally since 2020."
+        intro="I taught myself to code in 2019 and started working professionally the year after. I do my best work in small teams, close to product and design, where I can take an idea all the way to the app stores."
       />
       <ol className="mt-16 border-t border-line sm:mt-20">
         {EXPERIENCE.map((e, i) => (

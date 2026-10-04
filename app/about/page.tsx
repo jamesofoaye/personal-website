@@ -14,38 +14,42 @@ const CHAPTERS = [
   {
     year: "2019",
     title: "Teaching myself",
-    body: "I started coding in 2019 and never really stopped. A Google IT Support certificate first, then Andela's React programme — and a habit of learning by shipping.",
+    body: "I started coding in 2019 and I haven't stopped since. I earned the Google IT Support certificate first, then went through Andela's React programme, and I learned most of what I know by building real things.",
   },
   {
     year: "2020",
     title: "Shipping for others",
-    body: "Professional work from 2020: client web apps at MCAT Global, then managing a small frontend team at Hexlen. That's where I learned that code is the easy half; scope and people are the rest.",
+    body: "I started working professionally in 2020, building web apps for clients at MCAT Global. At Hexlen I managed a small frontend team, and I learned that writing the code is only part of the job. Agreeing on scope and working well with people matter just as much.",
   },
   {
     year: "2021",
     title: "Building in Ghana",
-    body: "I joined Dawurobo as VP of Engineering and equity partner. Delivery, payments, bulk SMS, commerce — infrastructure that has to work on real roads for real vendors.",
+    body: "I joined Dawurobo as VP of Engineering and became an equity partner. We build delivery, payments, bulk SMS and e-commerce products for vendors and customers across Ghana, and they have to work every single day.",
   },
   {
     year: "2022",
     title: "Building in the UAE",
-    body: "Frontend at DAT Engineering Consultancy and Yallah Property, then in 2024 Oxinus Holdings, part of IHC, where I lead frontend on Verinvo and helped build its AI agent.",
+    body: "I moved into frontend roles at DAT Engineering Consultancy and Yallah Property. In 2024 I joined Oxinus Holdings, part of IHC, where I lead the frontend of Verinvo and helped build its AI agent.",
   },
   {
     year: "2025",
     title: "Building my own",
-    body: "Hisab and DrivingInstructor.ae: products for the people around me in the UAE, built end to end — mobile, web, AI, growth — and run in public.",
+    body: "In 2025 I started DrivingInstructor.ae, and in 2026 I co-founded Hisab. Both are products for people around me in the UAE, and I build them end to end, from the mobile app and website to the AI features and growth.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <PageIntro eyebrow="About" title="Self-taught. Ghanaian. Building in Abu Dhabi.">
+      <PageIntro
+        eyebrow="About"
+        title="I am a self-taught engineer from Ghana, living in Abu Dhabi."
+      >
         <p className="mt-8 max-w-2xl text-xl leading-relaxed text-muted">
-          I&rsquo;m James Ofori Ayerakwa. I build web, mobile and AI products end to end, and I care
-          most about the unglamorous parts — permissions, privacy, the second language, the slow
-          network — because that&rsquo;s where products earn trust.
+          I&rsquo;m James Ofori Ayerakwa. I build web, mobile and AI products from start to finish.
+          The parts I care about most are the ones people rarely notice, like permissions, privacy,
+          support for a second language and apps that still work on a slow network, because that is
+          where people decide whether to trust a product.
         </p>
       </PageIntro>
 
@@ -71,15 +75,15 @@ export default function AboutPage() {
         {[
           {
             k: "How I work",
-            v: "Small teams, close to product and design. I write the spec, build the thing, measure it, and write down what we learned. AI-assisted development is part of the daily workflow, not a novelty.",
+            v: "I like working in small teams, close to product and design. I write the spec, build it, measure how people use it and write down what we learned. I use AI tools in my development work every day.",
           },
           {
             k: "What I care about",
-            v: "Privacy by design, RTL and multilingual done properly, and software that respects people who are stressed, busy or new to a country.",
+            v: "I care about privacy, about getting Arabic and other languages right, and about software that is kind to people who are stressed, busy or new to a country.",
           },
           {
             k: "Outside the code",
-            v: "I founded OJA Studios, a documentary company in Ghana behind The Rise Of. I'm also learning Arabic.",
+            v: "I founded OJA Studios, a documentary company in Ghana that makes The Rise Of. I'm also learning Arabic.",
           },
         ].map((x, i) => (
           <Reveal

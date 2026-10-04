@@ -137,7 +137,7 @@ export default async function CaseStudy({ params }: Props) {
 
         <section className="grid gap-6 py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
-            The problem
+            Why it exists
           </h2>
           <Reveal>
             <p className="font-display text-3xl leading-tight text-pretty text-ink sm:text-4xl">
@@ -149,7 +149,7 @@ export default async function CaseStudy({ params }: Props) {
 
         <section className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
           <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
-            {v.slug === "hisab" ? "What people get" : "What I built"}
+            {v.builtHeading ?? "What I built"}
           </h2>
           <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {v.built.map((b, i) => (
@@ -167,7 +167,7 @@ export default async function CaseStudy({ params }: Props) {
         {v.ai && (
           <section className="grid gap-6 border-t border-line py-20 md:grid-cols-[1fr_2fr] md:gap-12 md:py-28">
             <h2 className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
-              The AI in it
+              How AI is used
             </h2>
             <div className="grid gap-4">
               {v.ai.map((a, i) => (

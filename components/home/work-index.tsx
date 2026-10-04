@@ -27,8 +27,8 @@ export function WorkIndex() {
     <section id="work" className="mx-auto max-w-7xl px-5 py-28 sm:px-8 sm:py-36">
       <SectionHeading
         eyebrow="A few projects so far"
-        title="Five things I build and run."
-        intro="One national platform by day; my own products and a Ghanaian logistics company the rest of the time. Each one shipped, in use, and owned end to end."
+        title="These are the products I work on."
+        intro="During the day I lead the frontend of a national e-invoicing platform. Outside of that I run my own products, lead engineering at a logistics company in Ghana and produce documentaries. Click any project to read how I built it."
       />
 
       <div

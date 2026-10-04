@@ -116,6 +116,36 @@ function Motif({ slug }: { slug: string }) {
           <path d="M18 140c40-8 70 4 104-6s46-18 70-16" {...s} strokeDasharray="2 5" opacity=".7" />
         </svg>
       );
+    case "personal-vpn":
+      return (
+        <svg viewBox="0 0 200 150" aria-hidden className="size-full">
+          <rect x="22" y="40" width="40" height="72" rx="8" {...s} />
+          <path d="M42 58c-6 0-10 3-10 3v9c0 9 10 14 10 14s10-5 10-14v-9s-4-3-10-3Z" {...s} />
+          {[
+            [150, 30],
+            [170, 75],
+            [150, 120],
+          ].map(([x, y], i) => (
+            <g key={i} opacity={i === 1 ? 1 : 0.55}>
+              <rect
+                x={(x as number) - 14}
+                y={(y as number) - 10}
+                width="28"
+                height="20"
+                rx="3"
+                {...s}
+              />
+              <path d={`M${(x as number) - 8} ${y}h16`} {...s} />
+              <path
+                d={`M62 76C100 76 ${(x as number) - 40} ${y} ${(x as number) - 14} ${y}`}
+                {...s}
+                strokeDasharray={i === 1 ? undefined : "3 4"}
+              />
+            </g>
+          ))}
+          <circle cx="170" cy="75" r="3" fill="currentColor" />
+        </svg>
+      );
     default:
       return (
         <svg viewBox="0 0 200 150" aria-hidden className="size-full">

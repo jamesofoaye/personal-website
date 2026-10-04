@@ -78,7 +78,7 @@ export default function OgImage() {
           James Ofori
         </div>
         <div style={{ fontSize: 40, color: "#4a4d57", marginTop: 20, display: "flex" }}>
-          Web, mobile &amp; AI products — shipped, not demoed.
+          I build web and mobile products, and the AI inside them.
         </div>
       </div>
       <div style={{ display: "flex", fontSize: 22, color: "#676a74" }}>

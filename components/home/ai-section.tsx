@@ -3,14 +3,17 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 
 const PRINCIPLES = [
-  { k: "Permissions first", v: "Agents act with the user's own access — never a superuser key." },
   {
-    k: "Minimum context",
-    v: "Models see anonymised, task-specific data. PII stays out by construction.",
+    k: "Permissions come first",
+    v: "An AI agent should only be able to do what the person using it is allowed to do. I never give agents a master key.",
   },
   {
-    k: "Human in control",
-    v: "Every draft, plan and letter is the user's to accept, edit or bin.",
+    k: "The AI sees as little as possible",
+    v: "Models get anonymised data for the task in front of them and nothing more. Personal details stay out.",
+  },
+  {
+    k: "People stay in control",
+    v: "Every plan, draft or letter the AI writes is something the person can accept, change or throw away.",
   },
 ];
 
@@ -37,8 +40,8 @@ export function AiSection() {
           <SectionHeading
             invert
             eyebrow="Applied AI"
-            title="AI in production, not in a pitch deck."
-            intro="Agents, voice, extraction and MCP tooling that real people use every day — in a national e-invoicing platform, a personal-finance app and a delivery company."
+            title="I build AI features that people use every day."
+            intro="These are AI features I have built and shipped. They run inside a national e-invoicing platform, a personal finance app, a delivery company and a marketplace, and real people rely on them."
           />
 
           <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -55,35 +58,11 @@ export function AiSection() {
                         {s.where}
                       </span>
                     </div>
-                    <ol className="relative mt-6 space-y-4 ps-6">
-                      <span
-                        aria-hidden
-                        className="absolute top-2 bottom-2 left-[5px] w-px bg-gradient-to-b from-white/25 via-[#e6af2e]/60 to-white/25"
-                      />
-                      <span
-                        aria-hidden
-                        className="absolute left-[2px] size-[7px] rounded-full bg-[#e6af2e] shadow-[0_0_12px_#e6af2e]"
-                        style={{
-                          animation: `flow 3.2s ${i * 0.4}s cubic-bezier(.65,0,.35,1) infinite`,
-                        }}
-                      />
-                      {[
-                        ["In", s.input],
-                        ["Does", s.does],
-                        ["Out", s.output],
-                      ].map(([k, v]) => (
-                        <li key={k} className="relative">
-                          <span
-                            aria-hidden
-                            className="absolute top-[7px] -left-[22px] size-[9px] rounded-full border border-white/30 bg-[#0e1017]"
-                          />
-                          <span className="block font-mono text-[10px] tracking-[0.16em] text-[#8d909a] uppercase">
-                            {k}
-                          </span>
-                          <span className="text-[15px] leading-snug text-[#e8e9ec]">{v}</span>
-                        </li>
-                      ))}
-                    </ol>
+                    <p className="mt-4 text-[15px] leading-relaxed text-[#d7d9de]">{s.body}</p>
+                    <span
+                      aria-hidden
+                      className="mt-auto block h-px w-full origin-left scale-x-0 bg-[#e6af2e] pt-px transition-transform duration-700 group-hover:scale-x-100"
+                    />
                   </article>
                 </Reveal>
               </li>

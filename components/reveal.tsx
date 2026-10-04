@@ -58,7 +58,15 @@ export function WordReveal({
 }
 
 /** CSS-only word rise for above-the-fold text: animates before hydration. */
-export function CssWords({ text, delay = 0, className }: { text: string; delay?: number; className?: string }) {
+export function CssWords({
+  text,
+  delay = 0,
+  className,
+}: {
+  text: string;
+  delay?: number;
+  className?: string;
+}) {
   const words = text.split(" ");
   return (
     <span className={className}>

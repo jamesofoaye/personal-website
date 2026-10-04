@@ -9,7 +9,8 @@ export function SiteFooter() {
         <div>
           <p className="font-display text-3xl text-ink">James Ofori Ayerakwa</p>
           <p className="mt-2 max-w-sm text-sm text-muted">
-            Lead Frontend &amp; Applied AI Engineer. Built in Abu Dhabi, with roots in Accra.
+            I&rsquo;m a Lead Frontend and Applied AI Engineer. I live in Abu Dhabi and my roots are
+            in Accra, Ghana.
           </p>
           <p className="mt-6 font-mono text-[11px] tracking-wider text-faint uppercase">
             5.60°N 0.19°W <span className="text-gold">→</span> 24.45°N 54.38°E
@@ -52,7 +53,7 @@ export function SiteFooter() {
       </div>
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 pb-8 font-mono text-[11px] text-faint sm:px-8">
         <span>© {new Date().getFullYear()} James Ofori Ayerakwa</span>
-        <span>Designed &amp; built by hand (and a few agents)</span>
+        <span>I designed and built this site myself.</span>
       </div>
     </footer>
   );

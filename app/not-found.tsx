@@ -4,10 +4,10 @@ export default function NotFound() {
   return (
     <section className="mx-auto flex min-h-[80dvh] max-w-7xl flex-col justify-center px-5 pt-28 sm:px-8">
       <p className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
-        404 · off the map
+        Page not found
       </p>
-      <h1 className="mt-5 font-display text-[clamp(3rem,9vw,8rem)] leading-[0.92] text-ink">
-        This page took a <span className="text-gold-ink">wrong turn</span>.
+      <h1 className="mt-5 font-display text-[clamp(2.4rem,6vw,5rem)] leading-[0.92] text-ink">
+        I couldn&rsquo;t find that page. It may have moved, or the link may be wrong.
       </h1>
       <Link
         href="/"

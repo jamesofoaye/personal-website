@@ -17,13 +17,13 @@ export function Contact() {
         </Reveal>
         <WordReveal
           as="h2"
-          text="Building something that matters? Let’s talk."
+          text="If you are building something, I would like to hear about it."
           className="mt-10 block font-display text-[clamp(2.6rem,7vw,6rem)] leading-[0.98] text-balance text-ink"
         />
         <Reveal delay={0.15}>
           <p className="mx-auto mt-8 max-w-xl text-lg text-muted">
-            Product ideas, applied-AI problems, something for the UAE or Ghana — I read every
-            message.
+            Send me a message about a product idea, an AI problem or something you are building for
+            the UAE or Ghana. I read every message and I will get back to you.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <EmailLink className="inline-flex items-center gap-2 rounded-full border border-ink bg-ink px-8 py-3.5 text-lg text-white transition-colors hover:bg-white hover:text-ink">

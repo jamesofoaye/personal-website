@@ -51,29 +51,29 @@ The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF
 
 ## Analytics
 
-Events go through `trackEvent()` in `lib/analytics.ts`. They are sent to **Vercel Web Analytics** (custom events, first two properties) and, if `NEXT_PUBLIC_POSTHOG_KEY` is set, to **PostHog** with every property plus pageviews, autocapture, heatmaps and session replay (inputs masked). Speed Insights covers Core Web Vitals.
+Everything goes to **Vercel Web Analytics** (Pro plan custom events) through `trackEvent()` in `lib/analytics.ts`. Vercel keeps two properties per event on Pro, so each event sends at most two; if an event has only one, `device` (mobile, tablet or desktop) fills the second slot. Speed Insights covers Core Web Vitals. Upgrading to Web Analytics Plus raises the limit to eight properties and adds UTM reporting; nothing in the code needs to change except the `slice(0, 2)` in `trackEvent()`.
 
-Most tracking is declarative: add `data-track="event_name"` and `data-track-<prop>="value"` to any link or button. `components/analytics-tracker.tsx` also tracks things automatically.
+Most tracking is declarative: add `data-track="event_name"` and `data-track-<prop>="value"` to any link or button. `components/analytics-tracker.tsx` tracks the rest automatically.
 
 | Event | When it fires | Properties |
 |---|---|---|
-| `cta_clicked` | Hero and header calls to action | `cta` |
+| `cta_clicked` | Hero and header calls to action | `cta`, `device` |
 | `nav_clicked` | Any nav link, desktop or mobile | `item`, `menu` |
-| `mobile_menu_opened` | The mobile menu opens | |
-| `project_previewed` | Hovering a project on desktop (once per project) | `project` |
+| `mobile_menu_opened` | The mobile menu opens | `device` |
+| `project_previewed` | Hovering a project on desktop (once per project) | `project`, `device` |
 | `project_opened` | Opening a case study from the list or "Next" | `project`, `from` |
-| `screens_swiped` | Swiping the screenshot gallery on a case study | `project` |
-| `section_viewed` | A section crosses the middle of the screen (`data-section`) | `section` |
-| `scroll_depth` | 25, 50, 75, 90 and 100% of a page | `percent` |
-| `page_engagement` | Leaving or hiding a page | `seconds_bucket`, `max_scroll` |
-| `tab_returned` | Coming back to the tab | `away_seconds_bucket` |
+| `screens_swiped` | Swiping the screenshot gallery on a case study | `project`, `device` |
+| `section_viewed` | A section crosses the middle of the screen (`data-section`) | `section`, `device` |
+| `scroll_depth` | 25, 50, 75 and 100% of a page | `percent`, `device` |
+| `page_engagement` | Leaving or hiding a page | `time`, `scrolled` |
+| `tab_returned` | Coming back to the tab | `away`, `device` |
 | `outbound_link_clicked` | Any external link (LinkedIn, GitHub, live sites, YouTube) | `destination`, `location` |
 | `internal_link_clicked` | Any other internal link | `to`, `location` |
-| `email_clicked` / `email_copied` | Email link or the Copy email button | `location` |
-| `cv_saved_as_pdf` | The Save as PDF button on `/cv` | |
-| `globe_dragged` | First drag of the globe | `input` |
-| `text_copied` | Someone copies text | `length`, `section` |
-| `rage_click` | Three fast clicks in the same spot | `element` |
-| `page_not_found` | A 404 page loads | `referrer` |
+| `email_clicked` / `email_copied` | Email link or the Copy email button | `location`, `device` |
+| `cv_saved_as_pdf` | The Save as PDF button on `/cv` | `device` |
+| `globe_dragged` | First drag of the globe | `input`, `device` |
+| `text_copied` | Someone copies text | `section`, `device` |
+| `rage_click` | Three fast clicks in the same spot | `element`, `device` |
+| `page_not_found` | A 404 page loads | `referrer`, `device` |
 
-Every event also carries `path` and `viewport` (mobile, tablet or desktop) when sent to PostHog.
+Pageviews, referrers, countries and devices come from Web Analytics itself. Filter any custom event by `device` in the dashboard to see mobile behaviour on its own.

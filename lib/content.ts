@@ -103,7 +103,7 @@ export const VENTURES: Venture[] = [
       },
       {
         title: "Moving off Webflow",
-        body: "I moved our company websites from Webflow to our own code, which removed a subscription we no longer needed.",
+        body: "I moved one of our product websites from Webflow to our own code, which removed a subscription we no longer needed.",
       },
     ],
     ai: [

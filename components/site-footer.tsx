@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NAV, PERSON } from "@/lib/site";
 import { EmailLink } from "./email-link";
+import { CurrentYear } from "./current-year";
 
 export function SiteFooter() {
   return (
@@ -58,7 +59,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 pb-8 font-mono text-xs text-faint sm:px-8">
-        <span>© {new Date().getFullYear()} James Ofori Ayerakwa</span>
+        <span>© <CurrentYear /> James Ofori Ayerakwa</span>
         <span>I designed and built this site myself.</span>
       </div>
     </footer>

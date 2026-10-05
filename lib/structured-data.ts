@@ -40,9 +40,6 @@ const orgRef = (v: Venture) => {
           },
         }
       : {}),
-    ...(v.url
-      ? { contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: v.url } }
-      : {}),
   };
 };
 

@@ -40,6 +40,6 @@ export function proxy(req: NextRequest) {
 export const config = {
   // pages only: skip Next internals, the markdown route itself and static files
   matcher: [
-    "/((?!_next/|md(?:/|$)|mcp(?:/|$)|\\.well-known/|api/|icons/|globe/|work/[^/]+/(?:opengraph|twitter)-image|opengraph-image|twitter-image|apple-icon|icon\\.svg|favicon|robots\\.txt|sitemap\\.xml|llms|manifest|.*\\.(?:png|jpe?g|webp|avif|svg|ico|bin|woff2?|txt|xml|webmanifest|json|js|css|map)$).*)",
+    "/((?!_next/|md(?:/|$)|api/|icons/|globe/|work/[^/]+/(?:opengraph|twitter)-image|opengraph-image|twitter-image|apple-icon|icon\\.svg|favicon|robots\\.txt|sitemap\\.xml|llms|manifest|.*\\.(?:png|jpe?g|webp|avif|svg|ico|bin|woff2?|txt|xml|webmanifest|js|css|map)$).*)",
   ],
 };

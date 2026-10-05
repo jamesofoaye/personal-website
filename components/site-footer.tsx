@@ -64,6 +64,10 @@ export function SiteFooter() {
         </span>
         <span>
           I designed and built this site myself ·{" "}
+          <Link href="/developers" className="underline-offset-4 hover:text-ink hover:underline">
+            Developers &amp; MCP
+          </Link>{" "}
+          ·{" "}
           <Link href="/privacy" className="underline-offset-4 hover:text-ink hover:underline">
             Privacy
           </Link>

@@ -59,8 +59,15 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 pb-8 font-mono text-xs text-faint sm:px-8">
-        <span>© <CurrentYear /> James Ofori Ayerakwa</span>
-        <span>I designed and built this site myself.</span>
+        <span>
+          © <CurrentYear /> James Ofori Ayerakwa
+        </span>
+        <span>
+          I designed and built this site myself ·{" "}
+          <Link href="/privacy" className="underline-offset-4 hover:text-ink hover:underline">
+            Privacy
+          </Link>
+        </span>
       </div>
     </footer>
   );

@@ -14,13 +14,37 @@ export const CONTENT_UPDATED = "2026-10-04";
 const orgId = (v: Venture) => `${SITE_URL}/#org-${v.slug}`;
 const isFounded = (v: Venture) => /founder/i.test(v.role);
 
-const orgRef = (v: Venture) => ({
-  "@type": "Organization",
-  "@id": orgId(v),
-  name: v.name,
-  ...(v.url ? { url: v.url } : {}),
-  ...(isFounded(v) ? { founder: { "@id": PERSON_ID } } : {}),
-});
+// Country (and city where public) for each venture; never a street address.
+const PLACE: Record<string, [string, string?]> = {
+  verinvo: ["AE", "Abu Dhabi"],
+  hisab: ["AE"],
+  drivinginstructor: ["AE", "Abu Dhabi"],
+  dawurobo: ["GH", "Accra"],
+  "oja-studios": ["GH"],
+};
+
+const orgRef = (v: Venture) => {
+  const place = PLACE[v.slug];
+  return {
+    "@type": "Organization",
+    "@id": orgId(v),
+    name: v.name,
+    ...(v.url ? { url: v.url } : {}),
+    ...(isFounded(v) ? { founder: { "@id": PERSON_ID } } : {}),
+    ...(place
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: place[0],
+            ...(place[1] ? { addressLocality: place[1] } : {}),
+          },
+        }
+      : {}),
+    ...(v.url
+      ? { contactPoint: { "@type": "ContactPoint", contactType: "customer support", url: v.url } }
+      : {}),
+  };
+};
 
 export function personNode() {
   const founded = VENTURES.filter(isFounded).map(orgRef);
@@ -45,6 +69,13 @@ export function personNode() {
       ...founded,
     ],
     homeLocation: { "@type": "Place", name: "Abu Dhabi, United Arab Emirates" },
+    address: { "@type": "PostalAddress", addressLocality: "Abu Dhabi", addressCountry: "AE" },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "professional enquiries",
+      url: `${SITE_URL}/#contact`,
+      availableLanguage: ["English"],
+    },
     nationality: { "@type": "Country", name: "Ghana" },
     knowsLanguage: ["English"],
     hasCredential: [

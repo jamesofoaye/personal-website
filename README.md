@@ -22,6 +22,7 @@ Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical U
 |---|---|
 | All copy: ventures, AI systems, experience, skills | `lib/content.ts` |
 | Name, links, nav, site URL | `lib/site.ts` |
+| About, CV and privacy copy (shared with the Markdown versions) | `lib/about.ts`, `lib/cv.ts`, `lib/privacy.ts` |
 | Now page (edit monthly, bump the date in `page.tsx`) | `app/now/content.mdx` |
 | Case studies (generated from `lib/content.ts`) | `app/work/[slug]/page.tsx` |
 | Product screenshots | `public/work/<slug>/*.webp` |
@@ -55,6 +56,7 @@ Phones get the globe on the first screen, swipe rows for the AI cards and older 
 
 - **Structured data** (`lib/structured-data.ts`): Person and WebSite on every page, ProfilePage with a project list on `/` and `/about`, CreativeWork and BreadcrumbList on each case study, FAQPage on `/about`.
 - **FAQ** (`lib/faq.ts`): short factual answers shown on `/about` and published as FAQPage data, so search and AI tools can quote them.
+- **Markdown for agents** (`proxy.ts`, `lib/markdown.ts`, `app/md/`): every page answers `Accept: text/markdown` with a Markdown version (with `Vary: Accept`), and any page URL works with `.md` added (`/about.md`, `/index.md`). Unknown paths return a Markdown 404 that lists the real pages.
 - **`/llms.txt` and `/llms-full.txt`**: markdown summaries of the site for AI assistants, generated from `lib/content.ts`.
 - **robots.txt** allows all crawlers and names the main AI crawlers explicitly. **sitemap.xml** lists every page and its screenshots; bump `UPDATED` in `app/sitemap.ts` when content changes.
 - **Open Graph images** are generated per page, including one per case study.

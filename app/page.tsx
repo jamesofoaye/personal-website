@@ -10,8 +10,8 @@ import { Contact } from "@/components/home/contact";
 
 export const metadata: Metadata = {
   description: META_DESCRIPTIONS.home,
-  alternates: { canonical: "/", types: { "text/markdown": "/llms.txt" } },
-  openGraph: { description: META_DESCRIPTIONS.home, url: "/" },
+  alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
+  openGraph: { type: "website", description: META_DESCRIPTIONS.home, url: "/" },
   twitter: { description: META_DESCRIPTIONS.home },
 };
 

@@ -48,7 +48,10 @@ export function pageMeta({
   return {
     title,
     description,
-    alternates: { canonical: path, types: { "text/markdown": "/llms.txt" } },
+    alternates: {
+      canonical: path,
+      types: { "text/markdown": `${path === "/" ? "/index" : path}.md` },
+    },
     openGraph: {
       type,
       title: st,

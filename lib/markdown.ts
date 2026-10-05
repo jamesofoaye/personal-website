@@ -6,7 +6,6 @@ import { CV_EXTRAS, CV_PROFILE, STRENGTHS } from "./cv";
 import { FAQ } from "./faq";
 import { llmsTxt } from "./llms";
 import { PRIVACY, PRIVACY_UPDATED } from "./privacy";
-import { CLIENT_SETUP, DEV_INTRO, MACHINE_FILES, toolList } from "./developers";
 import { PERSON, SITE_URL } from "./site";
 
 /**
@@ -120,32 +119,12 @@ function privacy() {
   ].join("\n");
 }
 
-function developers() {
-  return [
-    "# Developer resources and MCP server — jamesofoaye",
-    "",
-    DEV_INTRO,
-    "",
-    "## Connect to the MCP server",
-    "",
-    ...CLIENT_SETUP.flatMap((c) => [`### ${c.client}`, "", c.how, "", "```", c.code, "```", ""]),
-    "## Tools",
-    "",
-    ...toolList().map((t) => `- \`${t.name}\`: ${t.description}`),
-    "",
-    "## Machine-readable files",
-    "",
-    ...MACHINE_FILES.map((f) => `- [${f.name}](${f.url}): ${f.what}`),
-  ].join("\n");
-}
-
 const PAGES: Record<string, () => string> = {
   "/": home,
   "/about": about,
   "/now": now,
   "/cv": cv,
   "/privacy": privacy,
-  "/developers": developers,
   ...Object.fromEntries(VENTURES.map((v) => [`/work/${v.slug}`, () => caseStudyMarkdown(v)])),
 };
 

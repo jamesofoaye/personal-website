@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { MARKDOWN_PATHS, notFoundMarkdown, pageMarkdown } from "@/lib/markdown";
 import { llmsTxt } from "@/lib/llms";
-import { mcpTools } from "@/lib/mcp/tools";
 
 describe("Markdown versions of pages", () => {
-  it("covers every page, including /developers and /privacy", () => {
-    for (const p of ["/", "/about", "/now", "/cv", "/privacy", "/developers", "/work/hisab"]) {
+  it("covers every page, including /privacy", () => {
+    for (const p of ["/", "/about", "/now", "/cv", "/privacy", "/work/hisab"]) {
       expect(MARKDOWN_PATHS).toContain(p);
     }
   });
@@ -25,20 +24,13 @@ describe("Markdown versions of pages", () => {
     expect(md).toMatch(/^# Page not found \(404\)/);
     expect(md).toContain("https://jamesofoaye.dev/llms.txt");
   });
-
-  it("documents every MCP tool on the developers page", () => {
-    const md = pageMarkdown("/developers")!;
-    for (const t of mcpTools()) expect(md).toContain(`\`${t.name}\``);
-    expect(md).toContain("https://jamesofoaye.dev/mcp");
-  });
 });
 
 describe("llms.txt", () => {
-  it("has when-to-use guidance and links the developer resources", () => {
+  it("has when-to-use guidance for agents", () => {
     const txt = llmsTxt();
     expect(txt).toMatch(/^# James Ofori Ayerakwa/);
     expect(txt).toContain("## When to use this site");
-    expect(txt).toContain("## Developer resources");
-    expect(txt).toContain("https://jamesofoaye.dev/.well-known/mcp/server-card.json");
+    expect(txt).not.toMatch(/\/mcp\b|server-card/);
   });
 });

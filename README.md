@@ -12,7 +12,7 @@ npm run dev        # http://localhost:3000
 npm run build      # production build
 npm run lint       # eslint
 npm run typecheck  # tsc --noEmit
-npm test           # vitest: Markdown, proxy, MCP server and server card
+npm test           # vitest: Markdown pages, content negotiation, structured data
 ```
 
 Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical URLs, the sitemap, OG images and JSON-LD. Default: `https://jamesofoaye.dev`.
@@ -57,7 +57,6 @@ Phones get the globe on the first screen, swipe rows for the AI cards and older 
 
 - **Structured data** (`lib/structured-data.ts`): Person and WebSite on every page, ProfilePage with a project list on `/` and `/about`, CreativeWork and BreadcrumbList on each case study, FAQPage on `/about`.
 - **FAQ** (`lib/faq.ts`): short factual answers shown on `/about` and published as FAQPage data, so search and AI tools can quote them.
-- **MCP server** (`app/mcp/route.ts`, `lib/mcp/`): a public, read-only MCP server over Streamable HTTP at `/mcp` (stateless, no auth) with six tools (`get_profile`, `list_projects`, `get_project`, `get_page`, `search_site`, `get_contact`) and every page as a Markdown resource. It never returns the email address, a phone number or a street address. Its server card (SEP-1649) is at `/.well-known/mcp/server-card.json`, mirrored at `/.well-known/mcp.json`, and `/developers` explains how to connect.
 - **Markdown for agents** (`proxy.ts`, `lib/markdown.ts`, `app/md/`): every page answers `Accept: text/markdown` with a Markdown version (with `Vary: Accept`), and any page URL works with `.md` added (`/about.md`, `/index.md`). Unknown paths return a Markdown 404 that lists the real pages.
 - **`/llms.txt` and `/llms-full.txt`**: markdown summaries of the site for AI assistants, generated from `lib/content.ts`.
 - **robots.txt** allows all crawlers and names the main AI crawlers explicitly. **sitemap.xml** lists every page and its screenshots; bump `UPDATED` in `app/sitemap.ts` when content changes.

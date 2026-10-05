@@ -32,7 +32,7 @@ describe("proxy", () => {
   it("rewrites .md URLs, including /index.md", () => {
     expect(rewrite(proxy(req("/about.md")))).toBe("https://jamesofoaye.dev/md/about");
     expect(rewrite(proxy(req("/index.md")))).toBe("https://jamesofoaye.dev/md");
-    expect(rewrite(proxy(req("/developers.md")))).toBe("https://jamesofoaye.dev/md/developers");
+    expect(rewrite(proxy(req("/privacy.md")))).toBe("https://jamesofoaye.dev/md/privacy");
   });
 
   it("passes HTML requests through with Vary: Accept", () => {

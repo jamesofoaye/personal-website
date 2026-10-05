@@ -20,8 +20,6 @@ export const META_DESCRIPTIONS = {
     "James Ofori has led engineering at Dawurobo in Ghana since 2021: delivery, bulk SMS, payments and e-commerce, with more than GH₵3M through Hubtel.",
   "oja-studios":
     "OJA Studios is a documentary company James Ofori started in Ghana. Its series The Rise Of has built a YouTube channel with more than 15,000 subscribers.",
-  developers:
-    "Developer resources for jamesofoaye.dev: a public MCP server over Streamable HTTP, llms.txt, Markdown pages and an MCP server card for AI agents.",
   "personal-vpn":
     "Why James Ofori built his own VPN with WireGuard on Google Cloud for his family's phones, and how idle servers sleep to keep the running cost low.",
 } as const;

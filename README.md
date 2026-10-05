@@ -31,14 +31,6 @@ Set `NEXT_PUBLIC_SITE_URL` in Vercel (see `.env.example`). It drives canonical U
 | Globe land dots (regenerate with `npm run globe:data`) | `public/globe/land.bin` |
 | Brand tokens (white, `#0E1017`, gold `#E6AF2E`, Commissioner) | `app/globals.css` |
 
-## Guardrails for copy
-
-- No job-search signals ("open to work", "hire me").
-- No phone numbers, date of birth or address. Email is assembled client-side.
-- Oxinus/Verinvo: public facts only — no client names, team sizes or roadmap. Ask Verinvo is credited as a team effort.
-- Hubtel was integrated, not built.
-- Hisab is a financial wellness app, described through user outcomes; never "advice" or "debt management".
-
 ## Design
 
 The original jamesofoaye theme: white canvas, brand black `#0E1017`, gold `#E6AF2E`, Commissioner type, the JamesOfoAye wordmark, black section labels with a gold orb, outline pill buttons.

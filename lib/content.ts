@@ -3,10 +3,6 @@
  *
  * Voice: James, first person, complete sentences, the way he writes on
  * LinkedIn. No slogans, no sentence fragments, no "poetry".
- *
- * Guardrails: no job-search signals, no phone/DOB, no internal Oxinus details
- * (client names, team size), Hubtel was integrated (not built), Hisab is a
- * financial wellness app described through what people get, never "advice".
  */
 
 export type Metric = { value: string; label: string };

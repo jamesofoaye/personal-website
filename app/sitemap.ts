@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/about`, lastModified: UPDATED, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/now`, lastModified: UPDATED, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/cv`, lastModified: UPDATED, changeFrequency: "monthly", priority: 0.6 },
+    {
+      url: `${SITE_URL}/developers`,
+      lastModified: UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
     { url: `${SITE_URL}/privacy`, lastModified: UPDATED, changeFrequency: "yearly", priority: 0.2 },
   ];
 }
